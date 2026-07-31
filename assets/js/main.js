@@ -43,6 +43,42 @@
     telLink.href = 'tel:' + CFG.telefonoVisible.replace(/\s/g, '');
   }
 
+  /* ── 2b. Sello de valoración de Google ───────────────────── */
+  ['ratingNum', 'ratingNum2'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el && CFG.googleRating) el.textContent = CFG.googleRating;
+  });
+  ['ratingCount', 'ratingCount2'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el && CFG.googleReviews) el.textContent = CFG.googleReviews;
+  });
+  var reviewsLink = document.getElementById('reviewsLink');
+  if (reviewsLink) {
+    if (CFG.googleReviewsUrl) reviewsLink.href = CFG.googleReviewsUrl;
+    if (CFG.googleReviews) reviewsLink.textContent = 'Ver las ' + CFG.googleReviews + ' reseñas en Google →';
+  }
+
+  /* ── 2c. Datos estructurados para Google (SEO local) ─────── */
+  if (CFG.direccion) {
+    var ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ElectronicsStore',
+      name: 'explore! mobile',
+      image: window.location.origin + '/assets/img/logotipo.png',
+      telephone: CFG.telefonoVisible || undefined,
+      address: { '@type': 'PostalAddress', streetAddress: CFG.direccion },
+      aggregateRating: (CFG.googleRating && CFG.googleReviews) ? {
+        '@type': 'AggregateRating',
+        ratingValue: CFG.googleRating.replace(',', '.'),
+        reviewCount: CFG.googleReviews
+      } : undefined,
+      url: window.location.origin + window.location.pathname
+    });
+    document.head.appendChild(ld);
+  }
+
   var mapBox = document.getElementById('mapBox');
   if (mapBox && CFG.mostrarMapa && CFG.direccion) {
     var iframe = document.createElement('iframe');

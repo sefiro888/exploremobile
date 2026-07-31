@@ -13,13 +13,18 @@ window.EXPLORE = {
   whatsapp: "34616113322",
 
   /* Teléfono tal y como quieres que se vea en la web */
-  telefonoVisible: "616 11 33 22",
+  telefonoVisible: "952 96 44 63",
 
   /* Dirección completa de la tienda */
-  direccion: "Calle Ejemplo 00, Localidad, Provincia",
+  direccion: "Av. las Palmeras, Local 14, 29630 Benalmádena, Málaga",
+
+  /* Valoración en Google (para el sello de confianza) */
+  googleRating: "4,9",
+  googleReviews: "223",
+  googleReviewsUrl: "https://share.google/P0gWbLZr0X8yQrWbc",
 
   /* Mostrar el mapa de Google embebido (true) o el recuadro gris (false) */
-  mostrarMapa: false,
+  mostrarMapa: true,
 
   /* Horario. Usa "cerrado" para los días que no abrís.
      Puedes poner varios tramos: [["10:00","14:00"],["17:00","20:30"]] */

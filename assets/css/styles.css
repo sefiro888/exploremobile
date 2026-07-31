@@ -156,6 +156,16 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
 .hero__glow--green{width:460px; height:460px; background:var(--green); bottom:-200px; right:-100px; opacity:.26}
 .hero__glow--cyan{width:340px; height:340px; background:var(--cyan); top:40%; left:45%; opacity:.14}
 .hero__in{position:relative; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center}
+.rating-badge{
+  display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
+  padding:8px 16px; border-radius:999px;
+  background:rgba(255,224,26,.09); border:1px solid rgba(255,224,26,.35);
+  font-size:.9rem; font-weight:600; color:var(--text); transition:.2s;
+}
+.rating-badge:hover{background:rgba(255,224,26,.16); transform:translateY(-1px)}
+.rating-badge__stars{color:var(--yellow); letter-spacing:1px; font-size:.85rem}
+.rating-badge__num{font-weight:800}
+.rating-badge__txt{color:var(--muted); font-weight:500}
 .hero h1{font-size:clamp(2.5rem,6vw,4.4rem); font-weight:900; margin-bottom:20px}
 .hero .lead{margin-bottom:32px; font-size:1.12rem}
 .hero__actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:40px}
@@ -407,6 +417,60 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
 .wa-float svg{width:24px; height:24px; fill:currentColor}
 .wa-float:hover{transform:translateY(-3px) scale(1.03)}
 @media(max-width:620px){ .wa-float span{display:none} .wa-float{padding:15px; right:16px; bottom:16px} }
+
+/* ── Navegación: página activa ────────────────────────── */
+.nav a.is-active{color:var(--text)}
+.nav a.is-active::after{right:0; background:var(--accent-nav,var(--magenta))}
+
+/* ── Cabecera de página interior (phero) ──────────────── */
+.phero{position:relative; overflow:hidden; padding:54px 0 64px; border-bottom:1px solid var(--line)}
+.phero__glow{position:absolute; width:460px; height:460px; border-radius:50%; filter:blur(120px); opacity:.28; top:-180px; pointer-events:none}
+.phero--pink .phero__glow{background:var(--magenta); left:-100px}
+.phero--green .phero__glow{background:var(--green); left:-100px}
+.phero--cyan .phero__glow{background:var(--cyan); left:-100px}
+.phero--yellow .phero__glow{background:var(--yellow); left:-100px}
+.phero__icon{
+  position:absolute; right:-14px; top:50%; transform:translateY(-50%);
+  font-size:13rem; line-height:1; opacity:.07; pointer-events:none; user-select:none;
+  filter:grayscale(1);
+}
+.breadcrumb{font-size:.85rem; color:var(--muted); margin-bottom:16px; position:relative}
+.breadcrumb a{color:var(--muted); transition:color .2s}
+.breadcrumb a:hover{color:var(--text)}
+.phero h1{font-size:clamp(2.1rem,4.6vw,3.4rem); position:relative; margin-bottom:16px}
+.phero .lead{position:relative; font-size:1.08rem}
+.phero__badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; position:relative}
+.phero__badges span{
+  display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:999px;
+  background:rgba(255,255,255,.05); border:1px solid var(--line-2); font-size:.85rem; font-weight:600;
+}
+
+/* ── Tarjetas-enlace de la home hacia cada página ─────── */
+.svc-link{cursor:pointer}
+.svc-link .svc__cta{pointer-events:none}
+
+/* ── Enlaces cruzados al final de cada página ─────────── */
+.cross{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:56px}
+@media(max-width:820px){ .cross{grid-template-columns:1fr} }
+.cross a{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:20px 22px; border-radius:var(--radius); background:var(--surface);
+  border:1px solid var(--line); font-weight:700; transition:.2s;
+}
+.cross a:hover{border-color:var(--line-2); background:var(--surface-2); transform:translateY(-3px)}
+.cross a span.go{color:var(--magenta); font-weight:800}
+
+/* ── Categorías dentro del FAQ ─────────────────────────── */
+.faq-cat{margin-top:38px}
+.faq-cat:first-child{margin-top:0}
+.faq-cat h3{font-size:1rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:14px}
+
+/* ── Mini reseñas para la página de contacto ──────────── */
+.mini-revs{display:grid; gap:14px}
+.mini-rev{padding:18px 20px; border-radius:var(--radius); background:var(--surface); border:1px solid var(--line)}
+.mini-rev .stars{font-size:.85rem; margin-bottom:8px}
+.mini-rev p{font-size:.92rem; color:var(--text)}
+.mini-rev cite{display:block; margin-top:8px; font-size:.8rem; color:var(--muted); font-style:normal}
 
 /* ── Animación de entrada ─────────────────────────────── */
 .reveal{opacity:0; transform:translateY(26px); transition:opacity .6s ease, transform .6s ease}
