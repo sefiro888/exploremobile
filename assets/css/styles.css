@@ -121,7 +121,8 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
 .header.is-stuck{border-bottom-color:var(--line); background:rgba(8,8,10,.92)}
 .header__in{display:flex; align-items:center; justify-content:space-between; gap:20px; padding-block:10px}
 .brand img{width:74px; height:auto; border-radius:12px}
-.nav{display:flex; gap:26px; font-weight:500; font-size:.95rem}
+.nav{display:flex; gap:20px; font-weight:500; font-size:.92rem}
+@media(max-width:1120px){ .nav{gap:15px; font-size:.88rem} }
 .nav a{color:var(--muted); position:relative; padding-block:6px; transition:color .2s}
 .nav a::after{
   content:''; position:absolute; left:0; right:100%; bottom:0; height:2px;
@@ -405,18 +406,116 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
 }
 .footer__legal a:hover{color:var(--text)}
 
-/* ── Botón flotante ───────────────────────────────────── */
+/* ── Botón flotante de WhatsApp (escritorio) ──────────── */
 .wa-float{
-  position:fixed; right:20px; bottom:20px; z-index:90;
-  display:inline-flex; align-items:center; gap:10px;
-  padding:14px 20px; border-radius:999px;
-  background:var(--wa); color:#04240F; font-weight:800;
-  box-shadow:0 16px 40px -12px rgba(37,211,102,.9);
-  transition:transform .2s, box-shadow .2s;
+  position:fixed; right:24px; bottom:24px; z-index:90;
+  display:inline-flex; align-items:center; gap:11px;
+  padding:15px 24px 15px 20px; border-radius:999px;
+  background:linear-gradient(135deg,#2ce670,var(--wa) 55%,#17b955);
+  color:#04240F; font-weight:800; font-size:1rem;
+  box-shadow:0 18px 44px -10px rgba(37,211,102,.75), 0 0 0 1px rgba(255,255,255,.14) inset;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s;
 }
-.wa-float svg{width:24px; height:24px; fill:currentColor}
-.wa-float:hover{transform:translateY(-3px) scale(1.03)}
-@media(max-width:620px){ .wa-float span{display:none} .wa-float{padding:15px; right:16px; bottom:16px} }
+.wa-float svg{width:26px; height:26px; fill:currentColor; position:relative; z-index:2}
+.wa-float span{position:relative; z-index:2}
+.wa-float:hover{transform:translateY(-4px) scale(1.04); box-shadow:0 24px 54px -10px rgba(37,211,102,.95)}
+.wa-float:active{transform:translateY(-1px) scale(.99)}
+
+/* Anillo de pulso: llama la atención sin ser molesto */
+.wa-float::before,
+.wa-float::after{
+  content:''; position:absolute; inset:0; border-radius:999px;
+  border:2px solid var(--wa); opacity:0; pointer-events:none;
+  animation:waPulse 3.2s ease-out infinite;
+}
+.wa-float::after{animation-delay:1.6s}
+@keyframes waPulse{
+  0%{transform:scale(1); opacity:.65}
+  70%{transform:scale(1.28); opacity:0}
+  100%{transform:scale(1.28); opacity:0}
+}
+
+/* Burbuja de reclamo que aparece al cargar */
+.wa-tip{
+  position:fixed; right:24px; bottom:88px; z-index:89;
+  max-width:230px; padding:12px 16px; border-radius:16px 16px 4px 16px;
+  background:var(--surface-2); border:1px solid var(--line-2);
+  font-size:.86rem; color:var(--text); line-height:1.45;
+  box-shadow:var(--shadow);
+  opacity:0; transform:translateY(10px) scale(.96);
+  transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;
+}
+.wa-tip.is-in{opacity:1; transform:none}
+.wa-tip strong{color:var(--wa)}
+.wa-tip__close{
+  position:absolute; top:-9px; right:-9px; width:24px; height:24px; border-radius:50%;
+  background:var(--surface-2); border:1px solid var(--line-2); color:var(--muted);
+  font-size:1rem; line-height:1; display:flex; align-items:center; justify-content:center;
+  pointer-events:auto; cursor:pointer; transition:.2s;
+}
+.wa-tip.is-in{pointer-events:auto}
+.wa-tip__close:hover{color:var(--text); border-color:var(--line-2); transform:scale(1.1)}
+
+/* ── Barra inferior fija en móvil ─────────────────────── */
+.wa-bar{display:none}
+
+@media(max-width:760px){
+  .wa-float,.wa-tip{display:none}
+
+  .wa-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:95;
+    display:flex; align-items:stretch; gap:10px;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(10,10,13,.92); backdrop-filter:blur(16px);
+    border-top:1px solid var(--line);
+    box-shadow:0 -10px 30px -12px rgba(0,0,0,.9);
+    transform:translateY(120%); transition:transform .35s cubic-bezier(.34,1.2,.64,1);
+  }
+  .wa-bar.is-in{transform:none}
+
+  .wa-bar__main{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:15px 18px; border-radius:14px;
+    background:linear-gradient(135deg,#2ce670,var(--wa) 55%,#17b955);
+    color:#04240F; font-weight:800; font-size:1.05rem;
+    box-shadow:0 10px 26px -8px rgba(37,211,102,.75);
+    position:relative; overflow:hidden;
+  }
+  /* Brillo que recorre el botón cada pocos segundos */
+  .wa-bar__main::after{
+    content:''; position:absolute; top:0; bottom:0; width:45%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+    transform:translateX(-160%) skewX(-18deg);
+    animation:waShine 4.5s ease-in-out infinite;
+  }
+  @keyframes waShine{
+    0%,72%{transform:translateX(-160%) skewX(-18deg)}
+    88%,100%{transform:translateX(320%) skewX(-18deg)}
+  }
+  .wa-bar__main svg{width:24px; height:24px; fill:currentColor; position:relative; z-index:2}
+  .wa-bar__main span{position:relative; z-index:2}
+  .wa-bar__main:active{transform:scale(.985)}
+
+  .wa-bar__tel{
+    display:flex; align-items:center; justify-content:center;
+    width:56px; border-radius:14px; flex:none;
+    background:rgba(255,255,255,.07); border:1px solid var(--line-2); color:var(--text);
+  }
+  .wa-bar__tel svg{width:22px; height:22px; fill:currentColor}
+  .wa-bar__tel:active{background:rgba(255,255,255,.13)}
+
+  /* Que la barra no tape el final de la página */
+  body{padding-bottom:84px}
+  .footer__bottom{padding-bottom:10px}
+
+  /* Fuera del móvil el CTA del hero ya es grande; aquí lo reforzamos */
+  .btn--wa{box-shadow:0 12px 30px -12px rgba(37,211,102,.85)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .wa-float::before,.wa-float::after,.wa-bar__main::after{animation:none}
+}
 
 /* ── Navegación: página activa ────────────────────────── */
 .nav a.is-active{color:var(--text)}
@@ -471,6 +570,107 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
 .mini-rev .stars{font-size:.85rem; margin-bottom:8px}
 .mini-rev p{font-size:.92rem; color:var(--text)}
 .mini-rev cite{display:block; margin-top:8px; font-size:.8rem; color:var(--muted); font-style:normal}
+
+/* ── Vinted Go ────────────────────────────────────────── */
+:root{ --vinted:#09B1BA; --vinted-d:#07868D; }
+
+.nav a.nav--vinted{
+  color:var(--vinted); font-weight:700;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.nav a.nav--vinted::after{background:var(--vinted)}
+.nav a.nav--vinted::before{
+  content:''; width:7px; height:7px; border-radius:50%;
+  background:var(--vinted); box-shadow:0 0 0 3px rgba(9,177,186,.22);
+}
+
+.phero--vinted .phero__glow{background:var(--vinted); left:-100px}
+.bar--vinted{background:var(--vinted)}
+
+/* Banda destacada de la portada */
+.vinted-band{
+  position:relative; overflow:hidden;
+  display:grid; grid-template-columns:auto 1fr auto; gap:28px; align-items:center;
+  padding:30px 36px; border-radius:var(--radius-lg);
+  background:linear-gradient(115deg,rgba(9,177,186,.20),rgba(9,177,186,.05) 60%,transparent);
+  border:1px solid rgba(9,177,186,.42);
+}
+.vinted-band::after{
+  content:''; position:absolute; width:280px; height:280px; border-radius:50%;
+  background:var(--vinted); filter:blur(90px); opacity:.16; right:-90px; top:-110px; pointer-events:none;
+}
+.vinted-band__ico{font-size:2.6rem; line-height:1; position:relative}
+.vinted-band__txt{position:relative}
+.vinted-band__tag{
+  display:inline-block; margin-bottom:8px; padding:4px 12px; border-radius:999px;
+  background:var(--vinted); color:#00272A; font-size:.72rem; font-weight:800;
+  letter-spacing:.1em; text-transform:uppercase;
+}
+.vinted-band h3{font-size:1.45rem; margin-bottom:8px}
+.vinted-band p{color:var(--muted); font-size:.98rem; max-width:62ch}
+.vinted-band .btn{position:relative; flex:none}
+@media(max-width:900px){
+  .vinted-band{grid-template-columns:1fr; gap:18px; padding:26px 24px; text-align:left}
+  .vinted-band .btn{width:100%}
+}
+
+.btn--vinted{
+  background:linear-gradient(135deg,#0ac6d0,var(--vinted) 60%,var(--vinted-d));
+  color:#00272A; box-shadow:0 14px 34px -12px rgba(9,177,186,.85);
+}
+.btn--vinted:hover{box-shadow:0 20px 42px -12px rgba(9,177,186,.95)}
+
+/* Pasos de Vinted (numerados con color propio) */
+.vsteps{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+@media(max-width:820px){ .vsteps{grid-template-columns:1fr} }
+.vstep{
+  position:relative; padding:28px 26px; border-radius:var(--radius-lg);
+  background:var(--surface); border:1px solid var(--line);
+  transition:.22s;
+}
+.vstep:hover{border-color:rgba(9,177,186,.5); transform:translateY(-4px)}
+.vstep__n{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:40px; height:40px; border-radius:12px; margin-bottom:14px;
+  background:rgba(9,177,186,.16); border:1px solid rgba(9,177,186,.45);
+  color:var(--vinted); font-weight:800; font-size:1.1rem;
+}
+.vstep h4{font-size:1.14rem; margin-bottom:8px}
+.vstep p{color:var(--muted); font-size:.95rem}
+
+/* Fichas de datos rápidos (plazos, horario, etc.) */
+.facts{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+@media(max-width:900px){ .facts{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:520px){ .facts{grid-template-columns:1fr} }
+.fact{
+  padding:22px; border-radius:var(--radius); text-align:center;
+  background:var(--surface); border:1px solid var(--line);
+}
+.fact strong{display:block; font-size:1.7rem; color:var(--vinted); line-height:1.1; margin-bottom:6px}
+.fact span{font-size:.9rem; color:var(--muted)}
+
+/* ── Cómo llegar ──────────────────────────────────────── */
+.ways{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+@media(max-width:900px){ .ways{grid-template-columns:1fr} }
+.way{
+  padding:28px 26px; border-radius:var(--radius-lg);
+  background:var(--surface); border:1px solid var(--line);
+  display:flex; flex-direction:column; transition:.22s;
+}
+.way:hover{border-color:var(--line-2); transform:translateY(-4px)}
+.way__ico{
+  width:48px; height:48px; border-radius:14px; margin-bottom:16px;
+  display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+  background:var(--accent-soft,rgba(236,0,140,.14));
+  border:1px solid var(--accent-line,rgba(236,0,140,.4));
+}
+.way--car{--accent-soft:rgba(236,0,140,.14); --accent-line:rgba(236,0,140,.4)}
+.way--bus{--accent-soft:rgba(87,183,91,.14); --accent-line:rgba(87,183,91,.4)}
+.way--walk{--accent-soft:rgba(34,184,230,.14); --accent-line:rgba(34,184,230,.4)}
+.way h3{font-size:1.2rem; margin-bottom:10px}
+.way p{color:var(--muted); font-size:.95rem; margin-bottom:14px}
+.way .ticks{margin-top:0; margin-bottom:18px}
+.way .btn{margin-top:auto; width:100%}
 
 /* ── Animación de entrada ─────────────────────────────── */
 .reveal{opacity:0; transform:translateY(26px); transition:opacity .6s ease, transform .6s ease}

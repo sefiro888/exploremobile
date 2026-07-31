@@ -18,21 +18,39 @@ Todo lo editable está en **`assets/js/config.js`**:
 Con eso se actualizan solos: todos los botones de WhatsApp, el enlace a Google Maps,
 el mapa, la tabla de horarios y el aviso de «Abierto ahora / Cerrado» de la barra superior.
 
+## Páginas
+
+| Archivo | Contenido |
+|---|---|
+| `index.html` | Portada: hero, Vinted Go, servicios, opiniones |
+| `servicios.html` | Móviles, fundas, sonido y carga, maletas, prepago, videojuegos |
+| `reparaciones.html` | Averías, proceso en 3 pasos, garantía |
+| `fibra-tarifas.html` | Comparativa de operadores, portabilidad |
+| `vinted-go.html` | Punto de entrega y recogida de Vinted |
+| `tienda.html` | Galería y por qué venir en persona |
+| `preguntas.html` | FAQ por categorías |
+| `contacto.html` | Mapa, horario, cómo llegar y opiniones |
+
 ## Fotos
 
-En la sección **La tienda** hay 6 recuadros de relleno (`<figure class="ph">`).
-Sustituye cada uno por una foto real:
+En `tienda.html` hay 6 recuadros de relleno (`<figure class="ph">`).
+Guarda las fotos en `assets/img/` y sustituye cada recuadro por:
 
 ```html
 <img src="assets/img/tienda-1.jpg" alt="Interior de la tienda">
 ```
 
+Nombres sugeridos: `escaparate.jpg`, `interior.jpg`, `fundas-marca.jpg`,
+`maletas.jpg`, `auriculares.jpg`, `powerbanks.jpg`.
+
 Recomendación: imágenes cuadradas, mínimo 800×800 px, optimizadas (JPG/WebP < 300 KB).
 
-## Reseñas
+## Botón de WhatsApp
 
-Las de `#opiniones` son de ejemplo. Cámbialas por las reales de la ficha de Google
-(texto y nombre del cliente).
+- **Móvil** (< 760 px): barra fija inferior con el CTA a ancho completo más un botón
+  de llamada. Se genera desde `main.js`, no hay que copiarla en cada página.
+- **Escritorio**: botón flotante con anillo de pulso y una burbuja de reclamo que
+  aparece a los 2 s y se retira sola a los 14 s (una vez por sesión).
 
 ## Cómo verla en local
 

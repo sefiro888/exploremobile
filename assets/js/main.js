@@ -79,6 +79,16 @@
     document.head.appendChild(ld);
   }
 
+  /* Rutas por modo de transporte: Google Maps calcula el trayecto
+     desde donde esté el cliente, así siempre está actualizado. */
+  if (CFG.direccion) {
+    var destino = encodeURIComponent(CFG.direccion);
+    [['wayCar', 'driving'], ['wayBus', 'transit'], ['wayWalk', 'walking']].forEach(function (par) {
+      var el = document.getElementById(par[0]);
+      if (el) el.href = 'https://www.google.com/maps/dir/?api=1&destination=' + destino + '&travelmode=' + par[1];
+    });
+  }
+
   var mapBox = document.getElementById('mapBox');
   if (mapBox && CFG.mostrarMapa && CFG.direccion) {
     var iframe = document.createElement('iframe');
@@ -205,4 +215,71 @@
   /* ── 7. Año del pie ──────────────────────────────────── */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
+
+  /* ── 8. Barra de contacto fija en móvil ──────────────────
+     Se genera desde aquí para no repetir el HTML en cada
+     página. En móvil es lo primero que ve el cliente al
+     terminar de leer, y lo que más contacto genera.        */
+  var WA_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm4.52 12.15c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.24-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>';
+  var TEL_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg>';
+
+  if (!document.querySelector('.wa-bar')) {
+    var bar = document.createElement('div');
+    bar.className = 'wa-bar';
+
+    var main = document.createElement('a');
+    main.className = 'wa-bar__main';
+    main.href = waUrl('Hola! Vengo desde la web y quiero información.');
+    main.target = '_blank';
+    main.rel = 'noopener';
+    main.innerHTML = WA_ICON + '<span>Escríbenos por WhatsApp</span>';
+    bar.appendChild(main);
+
+    if (CFG.telefonoVisible) {
+      var tel = document.createElement('a');
+      tel.className = 'wa-bar__tel';
+      tel.href = 'tel:' + CFG.telefonoVisible.replace(/\s/g, '');
+      tel.setAttribute('aria-label', 'Llamar al ' + CFG.telefonoVisible);
+      tel.innerHTML = TEL_ICON;
+      bar.appendChild(tel);
+    }
+
+    document.body.appendChild(bar);
+    setTimeout(function () { bar.classList.add('is-in'); }, 600);
+  }
+
+  /* ── 9. Burbuja de reclamo en escritorio ─────────────────
+     Aparece una vez por sesión, para no cansar a quien
+     navega entre varias páginas.                           */
+  var yaVista = false;
+  try { yaVista = sessionStorage.getItem('waTip') === '1'; } catch (e) {}
+
+  if (!yaVista && !document.querySelector('.wa-tip')) {
+    var tip = document.createElement('div');
+    tip.className = 'wa-tip';
+    tip.innerHTML = '<button class="wa-tip__close" aria-label="Cerrar">×</button>' +
+                    '¿Dudas con tu móvil? Escríbenos, <strong>te respondemos en minutos</strong>.';
+    document.body.appendChild(tip);
+
+    setTimeout(function () { tip.classList.add('is-in'); }, 2200);
+
+    tip.querySelector('.wa-tip__close').addEventListener('click', function (e) {
+      e.stopPropagation();
+      tip.remove();
+      try { sessionStorage.setItem('waTip', '1'); } catch (err) {}
+    });
+
+    tip.addEventListener('click', function () {
+      window.open(waUrl('Hola! Vengo desde la web y quiero información.'), '_blank', 'noopener');
+      try { sessionStorage.setItem('waTip', '1'); } catch (err) {}
+    });
+
+    // Se retira sola tras un rato para no estorbar
+    setTimeout(function () {
+      if (document.body.contains(tip)) {
+        tip.classList.remove('is-in');
+        setTimeout(function () { tip.remove(); }, 500);
+      }
+    }, 14000);
+  }
 })();
