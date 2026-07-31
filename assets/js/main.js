@@ -216,6 +216,51 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  /* ── 7b. Logotipos de las marcas ─────────────────────────
+     Marcas gráficas en SVG monocromo, para que encajen con
+     el fondo oscuro sin romper la paleta. Se insertan sobre
+     los nombres que ya están en el HTML: si el JS fallara,
+     los nombres siguen leyéndose igual.                     */
+  var MARCAS = {
+    'apple': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>',
+
+    'google': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>',
+
+    /* Xiaomi: cuadrado redondeado con las siglas MI */
+    'xiaomi': '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.4" y="1.4" width="21.2" height="21.2" rx="6.6" fill="none" stroke="currentColor" stroke-width="1.9"/><text x="12" y="16.4" text-anchor="middle" font-family="Outfit,sans-serif" font-size="10.4" font-weight="800" letter-spacing="-.3" fill="currentColor">MI</text></svg>',
+
+    /* Motorola: la M angular dentro de un círculo */
+    'motorola': '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.9 17.2V7.4l3.75 4.9L12 8.1l3.35 4.2 3.75-4.9v9.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+
+    /* Samsung: su marca es el propio nombre dentro de un óvalo */
+    'samsung': '<svg viewBox="0 0 62 18" aria-hidden="true" class="bmark--wide"><ellipse cx="31" cy="9" rx="30.1" ry="8.1" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="31" y="12.4" text-anchor="middle" font-family="Outfit,sans-serif" font-size="9" font-weight="700" letter-spacing="-.15" fill="currentColor">SAMSUNG</text></svg>',
+
+    /* Estas tres marcas son wordmarks: su logotipo es el nombre */
+    'oppo': '<svg viewBox="0 0 38 14" aria-hidden="true" class="bmark--wide"><text x="19" y="11.4" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" font-weight="700" letter-spacing="-.6" fill="currentColor">OPPO</text></svg>',
+
+    'realme': '<svg viewBox="0 0 42 14" aria-hidden="true" class="bmark--wide"><text x="21" y="11.4" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" font-weight="600" letter-spacing="-.5" fill="currentColor">realme</text></svg>',
+
+    'honor': '<svg viewBox="0 0 44 14" aria-hidden="true" class="bmark--wide"><text x="22" y="11.2" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11.4" font-weight="600" letter-spacing="1.2" fill="currentColor">HONOR</text></svg>'
+  };
+
+  /* En estas marcas el logotipo ya es el propio nombre, así que
+     el texto se oculta a la vista y se deja solo para lectores
+     de pantalla y buscadores (si no, saldría repetido). */
+  var SOLO_LOGO = ['samsung', 'oppo', 'realme', 'honor'];
+
+  document.querySelectorAll('.brands__list span').forEach(function (el) {
+    var nombre = el.textContent.trim();
+    var clave = nombre.toLowerCase();
+    var svg = MARCAS[clave];
+    if (!svg) return;
+
+    el.classList.add('brand-chip');
+    var texto = SOLO_LOGO.indexOf(clave) !== -1
+      ? '<span class="sr-only">' + nombre + '</span>'
+      : '<span>' + nombre + '</span>';
+    el.innerHTML = '<span class="bmark">' + svg + '</span>' + texto;
+  });
+
   /* ── 8. Barra de contacto fija en móvil ──────────────────
      Se genera desde aquí para no repetir el HTML en cada
      página. En móvil es lo primero que ve el cliente al
