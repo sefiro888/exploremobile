@@ -288,11 +288,20 @@
   var header = document.getElementById('header');
 
   if (burger && nav) {
-    // Fondo oscuro
+    // Fondo oscuro. Se añade dentro de <header> (no de <body>)
+    // a propósito: el <nav> vive dentro de la cabecera, que
+    // tiene su propio contexto de apilamiento (position:sticky
+    // + z-index). Si el fondo se cuelga de <body>, queda en un
+    // contexto distinto y el navegador puede pintarlo por
+    // encima del menú aunque su z-index sea menor: eso es lo
+    // que hacía que los toques en los enlaces no funcionaran
+    // y que el menú se viera "empañado". Metiéndolo aquí,
+    // ambos compiten dentro del mismo contexto y gana el que
+    // tiene mayor z-index (el menú, 200 frente a 190).
     var fondo = document.createElement('div');
     fondo.className = 'nav-backdrop';
     fondo.setAttribute('hidden', '');
-    document.body.appendChild(fondo);
+    (header || document.body).appendChild(fondo);
 
     // Botón de cerrar dentro del panel
     var cerrar = document.createElement('button');

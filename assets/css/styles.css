@@ -229,9 +229,12 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
     position:fixed; top:0; right:0; bottom:0; z-index:200;
     width:min(340px, 86vw); max-width:100%;
     display:flex; flex-direction:column; align-items:stretch; gap:0;
-    padding:calc(18px + env(safe-area-inset-top)) 20px calc(28px + env(safe-area-inset-bottom));
-    background:var(--ink-2); border-left:1px solid var(--line);
-    box-shadow:-24px 0 60px -20px rgba(0,0,0,.9);
+    padding:calc(22px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom));
+    /* Fondo sólido, sin transparencia: un degradado sutil entre
+       dos tonos oscuros de la propia paleta, no un color plano. */
+    background:linear-gradient(165deg, var(--surface-2) 0%, var(--ink-2) 55%, var(--ink) 100%);
+    border-left:1px solid var(--line-2);
+    box-shadow:-30px 0 70px -20px rgba(0,0,0,.95);
     /* Cerrado: fuera de pantalla y oculto, para que no genere
        barra de scroll horizontal ni sea accesible por error. */
     transform:translateX(100%); visibility:hidden; pointer-events:none;
@@ -241,31 +244,44 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
   }
   .nav.is-open{transform:translateX(0); visibility:visible; pointer-events:auto}
 
+  /* Franja de color arriba, a juego con la marca */
+  .nav::after{
+    content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg,var(--magenta),var(--yellow) 45%,var(--green) 78%,var(--cyan));
+  }
+
   /* Cabecera del propio panel */
   .nav::before{
-    content:'Menú'; display:block; flex:none;
+    content:'Menú'; display:block; flex:none; position:relative;
     font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--muted); font-weight:700; margin-bottom:14px; padding-left:4px;
+    color:var(--muted); font-weight:700; margin-bottom:16px; padding-left:4px;
   }
 
   .nav a{
-    padding:15px 14px; border-radius:12px; border-bottom:0;
+    position:relative;
+    padding:15px 16px; border-radius:12px; border-bottom:0;
     font-size:1.04rem; font-weight:600; color:var(--text);
     display:flex; align-items:center; min-height:50px;
-    transition:background .18s;
+    transition:background .18s, padding-left .18s;
   }
-  .nav a:active{background:rgba(255,255,255,.07)}
+  /* Realce sólido al tocar, sin transparencias */
+  .nav a:active{background:var(--surface); padding-left:20px}
   .nav a::after{display:none}
-  .nav a.is-active{background:rgba(236,0,140,.14); color:#fff}
+  .nav a.is-active{
+    background:var(--surface);
+    color:#fff;
+    box-shadow:inset 3px 0 0 var(--magenta);
+  }
 
   /* Botón de cerrar dentro del panel */
   .nav-close{
-    position:absolute; top:calc(14px + env(safe-area-inset-top)); right:16px;
-    width:40px; height:40px; border-radius:50%;
+    position:absolute; top:calc(18px + env(safe-area-inset-top)); right:18px; z-index:1;
+    width:38px; height:38px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,.07); color:var(--text); font-size:1.4rem; line-height:1;
+    background:var(--surface); border:1px solid var(--line-2);
+    color:var(--text); font-size:1.3rem; line-height:1;
   }
-  .nav-close:active{background:rgba(255,255,255,.14)}
+  .nav-close:active{background:var(--surface-2); border-color:var(--magenta)}
 
   /* Fondo oscuro detrás del panel.
      Sin backdrop-filter: en varios Chrome de Android el
