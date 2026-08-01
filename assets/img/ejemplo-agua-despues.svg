@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 740" width="600" height="740" role="img" aria-label="Placa base limpia tras el tratamiento de danos por agua">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101016"/><stop offset="1" stop-color="#07070a"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2a34"/><stop offset="0.5" stop-color="#1a1a22"/><stop offset="1" stop-color="#24242e"/>
+    </linearGradient>
+    <linearGradient id="oro" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9a227"/><stop offset="0.5" stop-color="#f2d65c"/><stop offset="1" stop-color="#c9a227"/>
+    </linearGradient>
+    <radialGradient id="brillo" cx="0.32" cy="0.2" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="740" fill="url(#bg)"/>
+  <g transform="translate(300,330)">
+    <rect x="-170" y="-210" width="340" height="420" rx="16" fill="#16281a" stroke="#57B75B" stroke-width="2" stroke-opacity="0.55"/>
+    <path d="M-140 -180 H-100 L-80 -170 H65" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-129 -166 H-89 L-69 -156 H153" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-122 -152 H-82 L-62 -142 H96" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-150 -138 H-110 L-90 -128 H91" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-125 -124 H-85 L-65 -114 H75" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-136 -110 H-96 L-76 -100 H150" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-133 -96 H-93 L-73 -86 H77" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-110 -82 H-70 L-50 -72 H110" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-110 -68 H-70 L-50 -58 H102" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-138 -54 H-98 L-78 -44 H114" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-134 -40 H-94 L-74 -30 H98" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-133 -26 H-93 L-73 -16 H132" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-117 -12 H-77 L-57 -2 H95" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-120 2 H-80 L-60 12 H71" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-129 16 H-89 L-69 26 H92" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-115 30 H-75 L-55 40 H101" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-137 44 H-97 L-77 54 H79" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-149 58 H-109 L-89 68 H139" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-143 72 H-103 L-83 82 H82" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-123 86 H-83 L-63 96 H108" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-127 100 H-87 L-67 110 H76" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-134 114 H-94 L-74 124 H92" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-129 128 H-89 L-69 138 H83" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-140 142 H-100 L-80 152 H148" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-138 156 H-98 L-78 166 H130" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/><path d="M-129 170 H-89 L-69 180 H151" fill="none" stroke="#7fd36a" stroke-opacity="0.7" stroke-width="1.6"/>
+    <rect x="-108" y="-140" width="90" height="70" rx="6" fill="#14141a" stroke="#4a4a58"/>
+    <rect x="24" y="-50" width="112" height="86" rx="6" fill="#14141a" stroke="#4a4a58"/>
+    <rect x="-120" y="60" width="120" height="60" rx="6" fill="#14141a" stroke="#4a4a58"/>
+    <!-- Contactos dorados limpios -->
+    <g fill="url(#oro)" opacity="0.9">
+      <rect x="-100" y="-190" width="14" height="8" rx="2"/><rect x="-78" y="-190" width="14" height="8" rx="2"/>
+      <rect x="-56" y="-190" width="14" height="8" rx="2"/><rect x="-34" y="-190" width="14" height="8" rx="2"/>
+      <rect x="-12" y="-190" width="14" height="8" rx="2"/><rect x="10" y="-190" width="14" height="8" rx="2"/>
+    </g>
+    <g transform="translate(0,244)">
+      <circle cx="0" cy="0" r="24" fill="#57B75B" opacity="0.2" stroke="#57B75B" stroke-width="2"/>
+      <path d="M-10 1 L-3 8 L11 -7" fill="none" stroke="#8ce090" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g font-family="Outfit, sans-serif" text-anchor="middle">
+    <rect x="205" y="690" width="190" height="34" rx="17" fill="#57B75B" opacity="0.17" stroke="#57B75B" stroke-opacity="0.55"/>
+    <text x="300" y="713" fill="#8ce090" font-size="17" font-weight="700">DESPU&#201;S</text>
+  </g></svg>

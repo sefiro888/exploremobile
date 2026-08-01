@@ -6,11 +6,22 @@
 <title>Reparación de móviles con garantía | explore! mobile</title>
 <meta name="description" content="Reparamos pantallas, baterías, conectores de carga, cámaras y más. Diagnóstico gratuito, presupuesto cerrado y garantía por escrito en Benalmádena.">
 <meta name="theme-color" content="#08080A">
-<link rel="icon" href="assets/img/logotipo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="explore! mobile">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://sefiro888.github.io/exploremobile/reparaciones.html">
+<meta property="og:title" content="Reparación de móviles con garantía en Benalmádena">
+<meta property="og:description" content="Pantallas, baterías, conectores y más. Diagnóstico gratis, presupuesto cerrado y garantía por escrito.">
+<meta property="og:image" content="https://sefiro888.github.io/exploremobile/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/styles.css?v=20260801-213045">
 </head>
 <body>
 
@@ -27,15 +38,7 @@
     <a href="index.html" class="brand" aria-label="explore! mobile, inicio">
       <img src="assets/img/logotipo.png" alt="explore! mobile" width="150" height="150">
     </a>
-    <nav class="nav" id="nav">
-      <a href="servicios.html">Servicios</a>
-      <a href="reparaciones.html" class="is-active">Reparaciones</a>
-      <a href="fibra-tarifas.html">Fibra y tarifas</a>
-      <a href="vinted-go.html" class="nav--vinted">Vinted Go</a>
-      <a href="tienda.html">Tienda</a>
-      <a href="preguntas.html">Preguntas</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
+    <nav class="nav" id="nav"></nav>
     <div class="header__cta">
       <a class="btn btn--wa btn--sm" href="#" data-wa="Hola, me gustaría hacer una consulta.">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.24-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
@@ -99,7 +102,121 @@
   </div>
 </section>
 
-<section class="section section--alt">
+<!-- ══ CINTA DE COMPROMISOS ══ -->
+<div class="marquee" data-marquee aria-label="Nuestros compromisos"></div>
+
+<!-- ══ ANTES / DESPUÉS ══ -->
+<section class="section section--alt" id="antes-despues">
+  <div class="wrap">
+    <header class="shead">
+      <p class="eyebrow"><span class="bar"></span>Antes y después</p>
+      <h2>Así entran y así salen</h2>
+      <p class="shead__sub">Elige una reparación y arrastra la barra para ver la diferencia.</p>
+    </header>
+
+    <!-- Pestañas de reparación -->
+    <div class="ba-tabs" role="tablist" aria-label="Tipo de reparación">
+      <button class="ba-tab is-on" role="tab" aria-selected="true"  data-ba="pantalla"><span>📵</span> Pantalla rota</button>
+      <button class="ba-tab"       role="tab" aria-selected="false" data-ba="bateria"><span>🔋</span> Batería hinchada</button>
+      <button class="ba-tab"       role="tab" aria-selected="false" data-ba="conector"><span>🔌</span> No carga</button>
+      <button class="ba-tab"       role="tab" aria-selected="false" data-ba="agua"><span>💧</span> Daño por agua</button>
+    </div>
+
+    <div class="ba-wrap">
+      <div class="ba" id="ba1" tabindex="0" role="slider"
+           aria-label="Comparador antes y después de una reparación"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% visible del después">
+        <img id="baAntes"  src="assets/img/ejemplo-antes.svg" alt="Móvil con la pantalla rota y agrietada, antes de repararla">
+        <img id="baDespues" class="ba__after" src="assets/img/ejemplo-despues.svg" alt="El mismo móvil con la pantalla nueva, después de la reparación">
+        <span class="ba__tag ba__tag--a">Antes</span>
+        <span class="ba__tag ba__tag--b">Después</span>
+        <div class="ba__handle">
+          <span class="ba__grip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 6 5 12l5.5 6V6Z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 6 19 12l-5.5 6V6Z"/></svg>
+          </span>
+        </div>
+        <span class="ba__hint">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M10.5 6 5 12l5.5 6V6Zm3 0L19 12l-5.5 6V6Z"/></svg>
+          Arrastra para comparar
+        </span>
+      </div>
+
+      <div class="ba-info" id="baInfo">
+        <!-- Pantalla -->
+        <div class="ba-panel is-on" data-panel="pantalla">
+          <h3>Cristal nuevo, tacto original</h3>
+          <p class="lead">
+            No basta con que se vea bien: el táctil tiene que responder igual que el primer día,
+            el brillo debe ser el mismo y la pantalla tiene que quedar sellada para que no entre polvo.
+            Por eso trabajamos con repuestos de calidad y no con el más barato del mercado.
+          </p>
+          <ul class="ticks ticks--lg">
+            <li>Cristal y táctil sustituidos por completo</li>
+            <li>Sellado original para que no entre polvo ni humedad</li>
+            <li>Comprobación de brillo, color y respuesta táctil</li>
+          </ul>
+          <a class="btn btn--wa btn--lg" href="#" data-wa="Hola! Tengo la pantalla rota y quiero presupuesto. Mi modelo es: ">Presupuesto para mi pantalla</a>
+        </div>
+
+        <!-- Batería -->
+        <div class="ba-panel" data-panel="bateria">
+          <h3>Una batería hinchada no espera</h3>
+          <p class="lead">
+            Cuando una batería se hincha empuja la pantalla desde dentro hasta levantarla o partirla,
+            y además deja de ser segura. Se cambia la celda, se vuelve a sellar el terminal y se
+            comprueba que carga y se descarga como debe.
+          </p>
+          <ul class="ticks ticks--lg">
+            <li>Retirada segura de la batería dañada</li>
+            <li>Celda nueva con su ciclo de carga completo</li>
+            <li>Prueba de carga y temperatura antes de entregarlo</li>
+          </ul>
+          <a class="btn btn--wa btn--lg" href="#" data-wa="Hola! Creo que la batería de mi móvil está hinchada. Modelo: ">Presupuesto para mi batería</a>
+        </div>
+
+        <!-- Conector -->
+        <div class="ba-panel" data-panel="conector">
+          <h3>Muchas veces no está roto: está sucio</h3>
+          <p class="lead">
+            El conector acumula pelusa del bolsillo hasta que el cable ya no llega a hacer contacto.
+            Antes de cambiar nada lo revisamos: si es suciedad, se limpia; si el conector está
+            dañado de verdad, se sustituye la pieza completa.
+          </p>
+          <ul class="ticks ticks--lg">
+            <li>Limpieza profunda con herramienta específica</li>
+            <li>Sustitución del conector solo si hace falta</li>
+            <li>Prueba con varios cables y cargadores</li>
+          </ul>
+          <a class="btn btn--wa btn--lg" href="#" data-wa="Hola! Mi móvil no carga bien. Modelo: ">Presupuesto para mi conector</a>
+        </div>
+
+        <!-- Agua -->
+        <div class="ba-panel" data-panel="agua">
+          <h3>Contra la corrosión, cuanto antes mejor</h3>
+          <p class="lead">
+            Lo que mata un móvil mojado no es el agua: son las sales que deja al secarse y que
+            van comiéndose la placa. Se abre, se retira la batería, se limpia la placa con
+            producto específico y se seca de forma controlada.
+          </p>
+          <ul class="ticks ticks--lg">
+            <li>Desmontaje y corte de corriente inmediato</li>
+            <li>Limpieza de placa y eliminación de sales</li>
+            <li>Revisión componente a componente</li>
+          </ul>
+          <a class="btn btn--wa btn--lg" href="#" data-wa="Hola! Se me ha mojado el móvil. Modelo: ">Mi móvil se ha mojado</a>
+        </div>
+
+        <p class="ba-demo">
+          <span aria-hidden="true">💡</span>
+          <span><strong>Ilustraciones de muestra.</strong> Cuando tengamos fotos de trabajos reales, se sustituyen aquí y el comparador funciona igual.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
   <div class="wrap">
     <header class="shead">
       <p class="eyebrow"><span class="bar bar--cyan"></span>Cómo funciona</p>
@@ -113,7 +230,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section section--alt">
   <div class="wrap">
     <header class="shead">
       <p class="eyebrow"><span class="bar bar--yellow"></span>Confianza</p>
@@ -130,10 +247,27 @@
       <div class="why"><h4>Sin sorpresas</h4><p>Si al abrir el móvil aparece algo más, te avisamos antes de seguir.</p></div>
       <div class="why"><h4>Garantía por escrito</h4><p>Te la entregamos con el ticket. Si algo falla, vuelves y lo resolvemos.</p></div>
     </div>
+
+    <div class="garantia" style="margin-top:34px">
+      <div class="sello" aria-hidden="true">
+        <b>3</b>
+        <span>Meses</span>
+        <small>de garantía</small>
+      </div>
+      <div class="garantia__txt">
+        <h3>Toda reparación sale con garantía por escrito</h3>
+        <p>
+          Te la entregamos con el ticket, indicando qué se ha cambiado y hasta cuándo está cubierto.
+          Si la pieza que hemos puesto falla dentro de ese plazo, la reponemos sin discutir.
+          No es un favor: es lo mínimo que debe ofrecer cualquiera que repare tu móvil.
+        </p>
+      </div>
+      <a class="btn btn--ghost" href="preguntas.html">Ver condiciones →</a>
+    </div>
   </div>
 </section>
 
-<section class="section section--alt">
+<section class="section">
   <div class="wrap">
     <div class="cta-band">
       <div>
@@ -154,27 +288,7 @@
 </main>
 
 <footer class="footer">
-  <div class="wrap footer__in">
-    <div class="footer__brand">
-      <img src="assets/img/logotipo.png" alt="explore! mobile" width="120" height="120">
-      <p>Tienda física de móviles, fundas y accesorios. Reparación, fibra, prepago y videojuegos.</p>
-    </div>
-    <div class="footer__links">
-      <h5>Servicios</h5>
-      <a href="servicios.html">Venta de móviles</a>
-      <a href="reparaciones.html">Reparaciones</a>
-      <a href="fibra-tarifas.html">Fibra y tarifas</a>
-      <a href="vinted-go.html">Punto Vinted Go</a>
-      <a href="tienda.html">Videojuegos</a>
-    </div>
-    <div class="footer__links">
-      <h5>Información</h5>
-      <a href="tienda.html">La tienda</a>
-      <a href="preguntas.html">Preguntas frecuentes</a>
-      <a href="contacto.html">Contacto</a>
-      <a href="https://www.instagram.com/explore_mobile/" target="_blank" rel="noopener">Instagram</a>
-    </div>
-  </div>
+  <div class="wrap footer__in" id="pie"></div>
   <div class="wrap footer__bottom">
     <span>© <span id="year"></span> explore! mobile. Todos los derechos reservados.</span>
     <span class="footer__legal"><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Cookies</a></span>
@@ -186,7 +300,8 @@
   <span>WhatsApp</span>
 </a>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/config.js?v=20260801-213045"></script>
+<script src="assets/js/main.js?v=20260801-213045"></script>
+<script src="assets/js/i18n.js?v=20260801-213045"></script>
 </body>
 </html>

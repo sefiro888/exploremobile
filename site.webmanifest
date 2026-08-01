@@ -1,0 +1,14 @@
+{
+  "name": "explore! mobile — Benalmádena",
+  "short_name": "explore! mobile",
+  "description": "Tienda de móviles, reparación, fibra y videojuegos en Benalmádena.",
+  "start_url": "/exploremobile/",
+  "display": "standalone",
+  "background_color": "#08080A",
+  "theme_color": "#08080A",
+  "icons": [
+    { "src": "assets/img/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/img/favicon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/img/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

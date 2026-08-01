@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcula el precio de tu reparación | explore! mobile Benalmádena</title>
+<meta name="description" content="Calcula en 30 segundos cuánto cuesta reparar tu móvil: elige marca, modelo y avería y te damos un precio orientativo al momento.">
+<meta name="theme-color" content="#08080A">
+<link rel="canonical" href="https://sefiro888.github.io/exploremobile/presupuesto.html">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="explore! mobile">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://sefiro888.github.io/exploremobile/presupuesto.html">
+<meta property="og:title" content="Calcula el precio de tu reparación — explore! mobile">
+<meta property="og:description" content="Marca, modelo y avería. Precio orientativo al momento y presupuesto cerrado en tienda.">
+<meta property="og:image" content="https://sefiro888.github.io/exploremobile/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/styles.css?v=20260801-213045">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar__in">
+    <span class="topbar__item"><span class="dot" id="openDot"></span><span id="openText">Comprobando horario…</span></span>
+    <span class="topbar__sep">•</span>
+    <span class="topbar__item">Punto Vinted Go · Reparaciones en el día</span>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="wrap header__in">
+    <a href="index.html" class="brand" aria-label="explore! mobile, inicio">
+      <img src="assets/img/logotipo.png" alt="explore! mobile" width="150" height="150">
+    </a>
+    <nav class="nav" id="nav"></nav>
+    <div class="header__cta">
+      <a class="btn btn--wa btn--sm" href="#" data-wa="Hola, me gustaría hacer una consulta.">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.24-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+        WhatsApp
+      </a>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="phero phero--pink">
+  <div class="phero__glow"></div>
+  <span class="phero__icon">🧮</span>
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">Inicio</a> / Calcular presupuesto</p>
+    <h1>¿Cuánto cuesta<br><span class="grad">arreglar tu móvil?</span></h1>
+    <p class="lead">
+      Elige marca, modelo y qué le pasa. En 30 segundos tienes un precio orientativo,
+      sin dar tu teléfono ni rellenar formularios.
+    </p>
+    <div class="phero__badges">
+      <span>⏱️ 30 segundos</span>
+      <span>🔓 Sin registrarte</span>
+      <span>📝 Presupuesto cerrado en tienda</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="calc">
+
+      <div class="calc-aviso" id="calcAviso" hidden>
+        <span class="calc-aviso__ico" aria-hidden="true">⚠️</span>
+        <span><b>Precios de ejemplo, todavía sin confirmar.</b> Sirven para enseñar cómo funciona
+        la calculadora. Escríbenos por WhatsApp y te damos el precio real de tu modelo.</span>
+      </div>
+
+      <!-- Pasos -->
+      <div class="calc-steps" aria-hidden="true">
+        <span class="calc-step is-on" data-paso="1"><b>1</b> Marca</span>
+        <span class="calc-steps__sep"></span>
+        <span class="calc-step" data-paso="2"><b>2</b> Modelo</span>
+        <span class="calc-steps__sep"></span>
+        <span class="calc-step" data-paso="3"><b>3</b> Avería</span>
+        <span class="calc-steps__sep"></span>
+        <span class="calc-step" data-paso="4"><b>4</b> Precio</span>
+      </div>
+
+      <!-- 1. Marca -->
+      <div class="calc-pane is-on" data-pane="1">
+        <h3>¿De qué marca es tu móvil?</h3>
+        <p class="sub">Si no está en la lista, elige «Otra marca».</p>
+        <div class="calc-grid" id="calcMarcas"></div>
+      </div>
+
+      <!-- 2. Modelo -->
+      <div class="calc-pane" data-pane="2">
+        <h3>¿Qué modelo?</h3>
+        <p class="sub">No pasa nada si no lo sabes exactamente: elige el más parecido.</p>
+        <div class="calc-grid" id="calcModelos"></div>
+        <button class="calc-back" data-volver="1">← Cambiar de marca</button>
+      </div>
+
+      <!-- 3. Avería -->
+      <div class="calc-pane" data-pane="3">
+        <h3>¿Qué le pasa?</h3>
+        <p class="sub">Si tiene más de una avería, elige la principal y nos lo cuentas por WhatsApp.</p>
+        <div class="calc-grid" id="calcAverias"></div>
+        <button class="calc-back" data-volver="2">← Cambiar de modelo</button>
+      </div>
+
+      <!-- 4. Resultado -->
+      <div class="calc-pane" data-pane="4">
+        <div class="calc-res" id="calcRes"></div>
+        <button class="calc-back" data-volver="1">← Empezar de nuevo</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="marquee" data-marquee aria-label="Nuestros compromisos"></div>
+
+<section class="section">
+  <div class="wrap">
+    <header class="shead">
+      <p class="eyebrow"><span class="bar bar--cyan"></span>Cómo leer el presupuesto</p>
+      <h2>Por qué damos un rango<br>y no un precio exacto</h2>
+    </header>
+    <div class="grid grid--3">
+      <div class="why">
+        <h4>El repuesto manda</h4>
+        <p>Para un mismo modelo hay pantallas de distinta calidad. Te explicamos las opciones y eliges tú, sabiendo lo que llevas.</p>
+      </div>
+      <div class="why">
+        <h4>Hasta que no se abre, no se sabe</h4>
+        <p>A veces lo que parece solo la pantalla lleva además un marco doblado. Si aparece algo más, te avisamos antes de seguir.</p>
+      </div>
+      <div class="why">
+        <h4>El precio final es cerrado</h4>
+        <p>El rango es orientativo, pero cuando veas tu móvil en el mostrador el precio que te demos es el que pagas.</p>
+      </div>
+    </div>
+
+    <div class="cta-band" style="margin-top:40px">
+      <div>
+        <h3>¿Prefieres preguntarnos directamente?</h3>
+        <p>Mándanos una foto del móvil y te contestamos con el precio real de tu caso.</p>
+      </div>
+      <a class="btn btn--wa btn--lg" href="#" data-wa="Hola! Quiero presupuesto para mi móvil. Modelo y avería: ">Preguntar por WhatsApp</a>
+    </div>
+
+    <div class="cross">
+      <a href="reparaciones.html">🛠️ Ver todas las reparaciones <span class="go">→</span></a>
+      <a href="consejos.html#pantalla">💡 ¿Reparar o cambiar de móvil? <span class="go">→</span></a>
+      <a href="contacto.html">📍 Horario y cómo llegar <span class="go">→</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer"><div class="wrap footer__in" id="pie"></div>
+  <div class="wrap footer__bottom">
+    <span>© <span id="year"></span> explore! mobile. Todos los derechos reservados.</span>
+    <span class="footer__legal"><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Cookies</a></span>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" data-wa="Hola! Vengo desde la web y quiero información." aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm4.52 12.15c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.24-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<script src="assets/js/config.js?v=20260801-213045"></script>
+<script src="assets/js/main.js?v=20260801-213045"></script>
+<script src="assets/js/i18n.js?v=20260801-213045"></script>
+</body>
+</html>

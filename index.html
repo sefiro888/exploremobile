@@ -6,15 +6,22 @@
 <title>explore! mobile — Móviles, reparación, fibra y videojuegos en Benalmádena</title>
 <meta name="description" content="Tienda física de móviles en Benalmádena. Venta, fundas y accesorios, reparación con garantía, fibra y tarifas, prepago y videojuegos. 4,9★ en Google. Escríbenos por WhatsApp.">
 <meta name="theme-color" content="#08080A">
-<link rel="icon" href="assets/img/logotipo.png">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="explore! mobile">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://sefiro888.github.io/exploremobile/">
 <meta property="og:title" content="explore! mobile — Móviles, reparación, fibra y videojuegos">
 <meta property="og:description" content="Tu tienda física de confianza en Benalmádena: móviles, accesorios, reparaciones con garantía, fibra y videojuegos. Presupuesto por WhatsApp sin compromiso.">
-<meta property="og:image" content="assets/img/logotipo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css">
+<meta property="og:image" content="https://sefiro888.github.io/exploremobile/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/styles.css?v=20260801-213045">
 </head>
 <body>
 
@@ -34,15 +41,7 @@
       <img src="assets/img/logotipo.png" alt="explore! mobile" width="150" height="150">
     </a>
 
-    <nav class="nav" id="nav">
-      <a href="servicios.html">Servicios</a>
-      <a href="reparaciones.html">Reparaciones</a>
-      <a href="fibra-tarifas.html">Fibra y tarifas</a>
-      <a href="vinted-go.html" class="nav--vinted">Vinted Go</a>
-      <a href="tienda.html">Tienda</a>
-      <a href="preguntas.html">Preguntas</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
+    <nav class="nav" id="nav"></nav>
 
     <div class="header__cta">
       <a class="btn btn--wa btn--sm" href="#" data-wa="Hola, me gustaría hacer una consulta.">
@@ -120,6 +119,9 @@
   </div>
 </section>
 
+<!-- ══ CINTA DE COMPROMISOS ══ -->
+<div class="marquee" data-marquee aria-label="Nuestros compromisos"></div>
+
 <!-- ══ VINTED GO ══ -->
 <section class="section" style="padding-bottom:0">
   <div class="wrap">
@@ -190,6 +192,18 @@
   </div>
 </section>
 
+<!-- ══ CIFRAS ══ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><strong><span data-contador="4.9" data-decimales="1">0</span></strong><span>de valoración media</span></div>
+      <div class="fact"><strong><span data-contador="223" data-sufijo="+">0</span></strong><span>opiniones en Google</span></div>
+      <div class="fact"><strong><span data-contador="20" data-sufijo="+">0</span></strong><span>años en el barrio</span></div>
+      <div class="fact"><strong><span data-contador="24" data-sufijo="h">0</span></strong><span>plazo habitual de reparación</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ POR QUÉ NOSOTROS ══ -->
 <section class="section section--alt">
   <div class="wrap">
@@ -256,27 +270,7 @@
 
 <!-- ══ PIE ══ -->
 <footer class="footer">
-  <div class="wrap footer__in">
-    <div class="footer__brand">
-      <img src="assets/img/logotipo.png" alt="explore! mobile" width="120" height="120">
-      <p>Tienda física de móviles, fundas y accesorios. Reparación, fibra, prepago y videojuegos.</p>
-    </div>
-    <div class="footer__links">
-      <h5>Servicios</h5>
-      <a href="servicios.html">Venta de móviles</a>
-      <a href="reparaciones.html">Reparaciones</a>
-      <a href="fibra-tarifas.html">Fibra y tarifas</a>
-      <a href="vinted-go.html">Punto Vinted Go</a>
-      <a href="tienda.html">Videojuegos</a>
-    </div>
-    <div class="footer__links">
-      <h5>Información</h5>
-      <a href="tienda.html">La tienda</a>
-      <a href="preguntas.html">Preguntas frecuentes</a>
-      <a href="contacto.html">Contacto</a>
-      <a href="https://www.instagram.com/explore_mobile/" target="_blank" rel="noopener">Instagram</a>
-    </div>
-  </div>
+  <div class="wrap footer__in" id="pie"></div>
   <div class="wrap footer__bottom">
     <span>© <span id="year"></span> explore! mobile. Todos los derechos reservados.</span>
     <span class="footer__legal"><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Cookies</a></span>
@@ -289,7 +283,8 @@
   <span>WhatsApp</span>
 </a>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/config.js?v=20260801-213045"></script>
+<script src="assets/js/main.js?v=20260801-213045"></script>
+<script src="assets/js/i18n.js?v=20260801-213045"></script>
 </body>
 </html>

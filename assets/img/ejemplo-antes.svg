@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 740" width="600" height="740" role="img" aria-label="Pantalla de móvil rota con grietas">
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101016"/><stop offset="1" stop-color="#07070a"/>
+    </linearGradient>
+    <linearGradient id="pantalla" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15151c"/><stop offset="1" stop-color="#0d0d12"/>
+    </linearGradient>
+    <radialGradient id="brillo" cx="0.3" cy="0.2" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="740" fill="url(#bg)"/>
+
+    <rect x="150" y="60" width="300" height="620" rx="34" fill="#1a1a20" stroke="#3a3a44" stroke-width="2"/>
+    <rect x="162" y="72" width="276" height="596" rx="26" fill="url(#pantalla)"/>
+    <rect x="258" y="80" width="84" height="20" rx="10" fill="#0b0b0f"/>
+  <g clip-path="url(#recorte)">
+    <clipPath id="recorte"><rect x="162" y="72" width="276" height="596" rx="26"/></clipPath>
+    <polygon points="252.9,154.8 274.8,180.4 242.5,181.9" fill="#cfd4ff" opacity="0.06"/>
+    <polygon points="241.1,198.6 250.3,210.3 239.6,215.3" fill="#cfd4ff" opacity="0.26"/>
+    <polygon points="280.6,253.2 293.7,250.0 291.0,259.1" fill="#cfd4ff" opacity="0.08"/>
+    <polygon points="364.7,199.0 355.2,209.7 349.5,188.6" fill="#cfd4ff" opacity="0.24"/>
+    <polygon points="194.8,186.3 209.9,192.6 191.8,213.0" fill="#cfd4ff" opacity="0.09"/>
+    <polygon points="346.5,330.9 322.8,306.9 348.8,301.8" fill="#cfd4ff" opacity="0.20"/>
+    <polygon points="393.4,264.0 375.5,264.5 383.3,248.3" fill="#cfd4ff" opacity="0.08"/>
+    <polygon points="333.8,362.2 319.6,344.4 342.8,342.4" fill="#cfd4ff" opacity="0.21"/>
+    <polygon points="312.4,278.3 307.8,265.8 317.9,270.8" fill="#cfd4ff" opacity="0.05"/>
+    <polygon points="428.8,167.9 415.7,177.0 412.7,150.2" fill="#cfd4ff" opacity="0.19"/>
+    <polygon points="345.4,204.6 327.5,223.6 325.4,204.7" fill="#cfd4ff" opacity="0.18"/>
+    <polygon points="288.7,322.1 287.0,302.2 302.0,309.3" fill="#cfd4ff" opacity="0.22"/>
+    <polygon points="235.7,303.3 249.0,293.4 252.9,314.6" fill="#cfd4ff" opacity="0.23"/>
+    <polygon points="269.6,199.1 273.9,207.8 261.9,210.3" fill="#cfd4ff" opacity="0.17"/>
+    <polygon points="316.6,268.3 309.7,265.1 318.1,263.4" fill="#cfd4ff" opacity="0.15"/>
+    <polygon points="292.7,302.2 297.3,287.1 309.3,300.5" fill="#cfd4ff" opacity="0.14"/>
+    <polygon points="339.8,255.1 312.5,253.2 322.5,239.2" fill="#cfd4ff" opacity="0.24"/>
+    <polygon points="289.7,385.0 296.3,367.2 305.8,381.5" fill="#cfd4ff" opacity="0.23"/>
+    <polygon points="326.3,243.1 308.1,257.6 307.7,226.3" fill="#cfd4ff" opacity="0.14"/>
+    <polygon points="362.8,275.7 351.8,275.2 357.2,266.9" fill="#cfd4ff" opacity="0.18"/>
+    <polygon points="342.0,422.3 328.9,388.4 356.7,403.7" fill="#cfd4ff" opacity="0.23"/>
+    <polygon points="358.4,385.5 354.5,378.1 363.5,380.6" fill="#cfd4ff" opacity="0.10"/>
+    <polygon points="329.5,358.4 313.5,328.6 346.4,333.3" fill="#cfd4ff" opacity="0.17"/>
+    <polygon points="208.1,226.9 232.2,233.9 221.3,251.0" fill="#cfd4ff" opacity="0.22"/>
+    <polygon points="216.7,318.1 232.1,298.6 237.1,325.1" fill="#cfd4ff" opacity="0.26"/>
+    <polygon points="190.3,272.5 197.5,272.7 195.4,278.8" fill="#cfd4ff" opacity="0.19"/>
+    <path d="M330.2 250.0 L321.0 260.1 L313.4 266.7 L306.1 276.7 L294.3 275.0 L282.6 271.8 L280.1 259.6 L272.8 250.0 L277.6 239.2 L284.2 230.2 L293.3 220.8 L306.4 221.9 L317.9 227.6 L327.5 236.7 L327.3 250.0 Z" fill="none" stroke="#aab2d8" stroke-opacity="0.42" stroke-width="1.39"/>
+    <path d="M372.4 250.0 L366.4 282.0 L340.4 300.7 L317.6 327.0 L284.8 316.5 L254.1 307.5 L238.4 279.7 L235.7 250.0 L233.6 218.0 L253.2 191.4 L284.8 183.4 L313.7 190.1 L340.9 198.7 L352.8 224.6 L378.2 250.0 Z" fill="none" stroke="#aab2d8" stroke-opacity="0.42" stroke-width="0.73"/>
+    <path d="M404.3 250.0 L397.5 296.9 L361.9 327.6 L321.6 344.5 L276.3 353.8 L235.2 331.2 L222.4 287.4 L197.8 250.0 L211.3 207.3 L240.2 175.0 L280.3 163.9 L319.4 165.2 L360.2 174.5 L397.3 203.1 L386.3 250.0 Z" fill="none" stroke="#aab2d8" stroke-opacity="0.42" stroke-width="1.23"/>
+    <path d="M438.0 250.0 L434.6 314.8 L372.8 341.3 L332.4 391.8 L270.3 379.9 L209.1 364.0 L195.4 300.4 L162.0 250.0 L163.1 184.0 L214.9 143.3 L272.8 130.8 L331.8 110.6 L391.1 135.7 L438.0 178.0 L438.0 250.0 Z" fill="none" stroke="#aab2d8" stroke-opacity="0.42" stroke-width="0.59"/>
+    <path d="M438.0 250.0 L438.0 331.3 L394.1 368.0 L333.5 397.0 L261.5 418.9 L205.0 369.1 L162.0 329.1 L162.0 250.0 L162.0 164.4 L195.5 118.9 L257.0 72.0 L332.7 106.7 L397.0 128.3 L438.0 180.2 L438.0 250.0 Z" fill="none" stroke="#aab2d8" stroke-opacity="0.42" stroke-width="0.62"/>
+    <path d="M438.0 250.0 L438.0 330.5 L430.1 413.2 L350.3 470.4 L249.5 471.3 L174.8 407.0 L162.0 330.6 L162.0 250.0 L162.0 142.1 L162.0 72.0 L256.4 72.0 L347.5 72.0 L415.5 105.2 L438.0 172.8 L438.0 250.0 Z" fill="none" stroke="#aab2d8" stroke-opacity="0.42" stroke-width="1.02"/>
+    <path d="M300 250 L412.4 278.4 L438.0 289.2 L438.0 371.8" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.50" stroke-linecap="round"/>
+    <path d="M300 250 L396.7 310.2 L438.0 386.5 L438.0 441.1 L438.0 473.5 L438.0 648.8" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="2.04" stroke-linecap="round"/>
+    <path d="M300 250 L334.1 302.9 L374.5 351.5 L421.7 394.4 L438.0 449.7" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="0.87" stroke-linecap="round"/>
+    <path d="M300 250 L356.4 385.6 L350.5 539.3 L434.1 668.0 L365.0 668.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.92" stroke-linecap="round"/>
+    <path d="M300 250 L286.8 346.4 L317.3 443.7 L295.4 541.7" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.26" stroke-linecap="round"/>
+    <path d="M300 250 L228.6 330.7 L162.0 413.9 L162.0 506.3 L162.0 598.1" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.54" stroke-linecap="round"/>
+    <path d="M300 250 L232.7 309.9 L164.8 369.2 L162.0 425.2" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="2.30" stroke-linecap="round"/>
+    <path d="M300 250 L259.4 254.1 L218.8 258.0 L179.1 268.8 L162.0 313.4 L162.0 297.8" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.93" stroke-linecap="round"/>
+    <path d="M300 250 L162.0 244.0 L162.0 147.6 L162.0 204.3" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="0.99" stroke-linecap="round"/>
+    <path d="M300 250 L225.1 189.1 L162.0 136.8 L162.0 82.0 L162.0 72.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="0.74" stroke-linecap="round"/>
+    <path d="M300 250 L256.8 173.2 L181.0 120.0 L162.0 72.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.19" stroke-linecap="round"/>
+    <path d="M300 250 L261.3 100.8 L239.6 72.0 L214.5 72.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.96" stroke-linecap="round"/>
+    <path d="M300 250 L333.4 128.8 L390.3 72.0 L340.9 72.0 L438.0 72.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="2.01" stroke-linecap="round"/>
+    <path d="M300 250 L378.7 73.8 L438.0 72.0 L438.0 72.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.98" stroke-linecap="round"/>
+    <path d="M300 250 L372.6 191.1 L438.0 144.6 L438.0 76.7 L438.0 72.0 L438.0 72.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.70" stroke-linecap="round"/>
+    <path d="M300 250 L401.6 234.5 L438.0 164.1 L438.0 156.9 L438.0 150.2 L438.0 72.0" fill="none" stroke="#c9d0f5" stroke-opacity="0.62" stroke-width="1.70" stroke-linecap="round"/>
+    <circle cx="300" cy="250" r="17" fill="#e6e9ff" opacity="0.30"/>
+    <circle cx="300" cy="250" r="7" fill="#ffffff" opacity="0.55"/>
+  </g>
+  <rect x="162" y="72" width="276" height="596" rx="26" fill="url(#brillo)"/>
+  <g font-family="Outfit, sans-serif" text-anchor="middle">
+    <rect x="205" y="690" width="190" height="34" rx="17" fill="#EC008C" opacity="0.16" stroke="#EC008C" stroke-opacity="0.5"/>
+    <text x="300" y="713" fill="#ff7ac7" font-size="17" font-weight="700">ANTES</text>
+  </g>
+</svg>

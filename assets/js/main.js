@@ -28,6 +28,105 @@
     }
   });
 
+  /* ── 1b. Menú y pie, generados desde aquí ────────────────
+     Así solo hay que tocar un sitio para añadir o cambiar
+     una página, y todas quedan sincronizadas.              */
+  var MENU = [
+    { url: 'servicios.html',      txt: 'Servicios' },
+    { url: 'reparaciones.html',   txt: 'Reparaciones' },
+    { url: 'presupuesto.html',    txt: 'Presupuesto', destacado: true },
+    { url: 'fibra-tarifas.html',  txt: 'Fibra' },
+    { url: 'vinted-go.html',      txt: 'Vinted Go', clase: 'nav--vinted' },
+    { txt: 'Más', submenu: [
+        { url: 'tienda.html',      txt: '🏬 La tienda' },
+        { url: 'que-movil.html',   txt: '🤔 ¿Qué móvil me compro?' },
+        { url: 'consejos.html',    txt: '💡 Consejos' },
+        { url: 'empresas.html',    txt: '🏢 Para empresas' },
+        { url: 'tourists.html',    txt: '🌍 Visitors / Touristen' },
+        { url: 'preguntas.html',   txt: '❓ Preguntas frecuentes' }
+      ] },
+    { url: 'contacto.html',       txt: 'Contacto' }
+  ];
+
+  var PIE = [
+    { titulo: 'Servicios', enlaces: [
+      { url: 'servicios.html',     txt: 'Venta de móviles' },
+      { url: 'reparaciones.html',  txt: 'Reparaciones' },
+      { url: 'presupuesto.html',   txt: 'Calcular presupuesto' },
+      { url: 'fibra-tarifas.html', txt: 'Fibra y tarifas' },
+      { url: 'vinted-go.html',     txt: 'Punto Vinted Go' }
+    ] },
+    { titulo: 'Información', enlaces: [
+      { url: 'tienda.html',    txt: 'La tienda' },
+      { url: 'que-movil.html', txt: '¿Qué móvil me compro?' },
+      { url: 'consejos.html',  txt: 'Consejos' },
+      { url: 'empresas.html',  txt: 'Para empresas' },
+      { url: 'preguntas.html', txt: 'Preguntas frecuentes' },
+      { url: 'contacto.html',  txt: 'Contacto' }
+    ] }
+  ];
+
+  var paginaActual = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+
+  var nav = document.getElementById('nav');
+  if (nav && !nav.children.length) {
+    nav.innerHTML = MENU.map(function (m) {
+      if (m.submenu) {
+        var activo = m.submenu.some(function (s) { return s.url === paginaActual; });
+        return '<div class="nav-drop' + (activo ? ' is-active' : '') + '">' +
+                 '<button class="nav-drop__btn" aria-expanded="false" aria-haspopup="true">' + m.txt +
+                   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>' +
+                 '</button>' +
+                 '<div class="nav-drop__list">' +
+                   m.submenu.map(function (s) {
+                     return '<a href="' + s.url + '"' + (s.url === paginaActual ? ' class="is-active"' : '') + '>' + s.txt + '</a>';
+                   }).join('') +
+                 '</div>' +
+               '</div>';
+      }
+      var cls = [];
+      if (m.clase) cls.push(m.clase);
+      if (m.destacado) cls.push('nav--cta');
+      if (m.url === paginaActual) cls.push('is-active');
+      return '<a href="' + m.url + '"' + (cls.length ? ' class="' + cls.join(' ') + '"' : '') + '>' + m.txt + '</a>';
+    }).join('');
+
+    // Desplegable: en escritorio se abre al pulsar, en móvil se despliega dentro
+    nav.querySelectorAll('.nav-drop__btn').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var d = b.parentNode;
+        var abierto = d.classList.toggle('is-open');
+        b.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+    });
+    document.addEventListener('click', function () {
+      nav.querySelectorAll('.nav-drop.is-open').forEach(function (d) {
+        d.classList.remove('is-open');
+        d.querySelector('.nav-drop__btn').setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var pie = document.getElementById('pie');
+  if (pie && !pie.children.length) {
+    pie.innerHTML =
+      '<div class="footer__brand">' +
+        '<img src="assets/img/logotipo.png" alt="explore! mobile" width="120" height="120">' +
+        '<p>Tienda física de móviles, fundas y accesorios. Reparación, fibra, prepago, videojuegos y punto Vinted Go.</p>' +
+      '</div>' +
+      PIE.map(function (c, i) {
+        var enlaces = c.enlaces.map(function (e) {
+          return '<a href="' + e.url + '">' + e.txt + '</a>';
+        }).join('');
+        // Instagram solo en la última columna
+        if (i === PIE.length - 1) {
+          enlaces += '<a href="https://www.instagram.com/explore_mobile/" target="_blank" rel="noopener">Instagram</a>';
+        }
+        return '<div class="footer__links"><h5>' + c.titulo + '</h5>' + enlaces + '</div>';
+      }).join('');
+  }
+
   /* ── 2. Datos de contacto ─────────────────────────────── */
   var addr = document.getElementById('addr');
   if (addr && CFG.direccion) addr.textContent = CFG.direccion;
@@ -141,11 +240,9 @@
   var dot = document.getElementById('openDot');
   var txt = document.getElementById('openText');
   if (txt) {
-    if (abierto) {
-      txt.textContent = 'Abierto ahora · cerramos a las ' + cierra;
-    } else {
-      // Buscamos la siguiente apertura
-      var prox = null;
+    // Buscamos la siguiente apertura (para cuando está cerrado)
+    var prox = null, proxCorto = null;
+    if (!abierto) {
       for (var i = 0; i < 7 && !prox; i++) {
         var d = (hoy + i) % 7;
         var dia = H[d];
@@ -153,38 +250,101 @@
         for (var j = 0; j < dia.tramos.length; j++) {
           var ini = dia.tramos[j][0];
           if (i > 0 || minutos(ini) > min) {
-            prox = (i === 0 ? 'hoy' : i === 1 ? 'mañana' : 'el ' + dia.etiqueta.toLowerCase()) + ' a las ' + ini;
+            var cuando = (i === 0 ? 'hoy' : i === 1 ? 'mañana' : 'el ' + dia.etiqueta.toLowerCase());
+            prox = cuando + ' a las ' + ini;
+            proxCorto = (i === 0 ? 'hoy' : i === 1 ? 'mañana' : dia.etiqueta.slice(0, 3).toLowerCase()) + ' ' + ini;
             break;
           }
         }
       }
-      txt.textContent = 'Cerrado ahora' + (prox ? ' · abrimos ' + prox : '') + ' — escríbenos por WhatsApp';
       if (dot) dot.classList.add('is-closed');
     }
+
+    /* En una pantalla estrecha el mensaje largo no cabe y se
+       cortaba a la mitad. Aquí se usa una versión corta.      */
+    function pintarHorario() {
+      var estrecho = window.innerWidth <= 760;
+      if (abierto) {
+        txt.textContent = estrecho
+          ? 'Abierto · cerramos ' + cierra
+          : 'Abierto ahora · cerramos a las ' + cierra;
+      } else {
+        txt.textContent = estrecho
+          ? 'Cerrado · abrimos ' + (proxCorto || '')
+          : 'Cerrado ahora' + (prox ? ' · abrimos ' + prox : '') + ' — escríbenos por WhatsApp';
+      }
+    }
+    pintarHorario();
+    window.addEventListener('resize', pintarHorario);
   }
 
-  /* ── 4. Menú móvil ───────────────────────────────────── */
+  /* ── 4. Menú móvil ───────────────────────────────────────
+     Panel lateral anclado a la ventana: no depende de la
+     altura de la cabecera ni del banner, así que nunca se
+     descoloca. Bloquea el scroll del fondo mientras está
+     abierto y se cierra con el fondo, la X o la tecla Esc.  */
   var burger = document.getElementById('burger');
   var nav = document.getElementById('nav');
   var header = document.getElementById('header');
 
-  function posicionaNav() {
-    if (header) document.documentElement.style.setProperty('--navtop', header.getBoundingClientRect().bottom + 'px');
-  }
-  posicionaNav();
-  window.addEventListener('resize', posicionaNav);
-  window.addEventListener('scroll', posicionaNav, { passive: true });
-
   if (burger && nav) {
-    burger.addEventListener('click', function () {
-      var abiertoNav = nav.classList.toggle('is-open');
-      burger.setAttribute('aria-expanded', abiertoNav ? 'true' : 'false');
+    // Fondo oscuro
+    var fondo = document.createElement('div');
+    fondo.className = 'nav-backdrop';
+    fondo.setAttribute('hidden', '');
+    document.body.appendChild(fondo);
+
+    // Botón de cerrar dentro del panel
+    var cerrar = document.createElement('button');
+    cerrar.className = 'nav-close';
+    cerrar.setAttribute('aria-label', 'Cerrar menú');
+    cerrar.innerHTML = '&times;';
+    nav.appendChild(cerrar);
+
+    var posicionScroll = 0;
+
+    function abrirMenu() {
+      posicionScroll = window.scrollY;
+      nav.classList.add('is-open');
+      fondo.removeAttribute('hidden');
+      requestAnimationFrame(function () { fondo.classList.add('is-on'); });
+      document.body.classList.add('nav-abierto');
+      burger.setAttribute('aria-expanded', 'true');
+      // El primer enlace recibe el foco, para quien navega con teclado
+      var primero = nav.querySelector('a');
+      if (primero) setTimeout(function () { primero.focus({ preventScroll: true }); }, 320);
+    }
+
+    function cerrarMenu() {
+      nav.classList.remove('is-open');
+      fondo.classList.remove('is-on');
+      setTimeout(function () { if (!nav.classList.contains('is-open')) fondo.setAttribute('hidden', ''); }, 320);
+      document.body.classList.remove('nav-abierto');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (nav.classList.contains('is-open')) cerrarMenu(); else abrirMenu();
     });
+
+    cerrar.addEventListener('click', cerrarMenu);
+    fondo.addEventListener('click', cerrarMenu);
+
     nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        nav.classList.remove('is-open');
-        burger.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', cerrarMenu);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        cerrarMenu();
+        burger.focus();
+      }
+    });
+
+    // Si se gira el móvil o se pasa a escritorio, el menú se cierra
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 980 && nav.classList.contains('is-open')) cerrarMenu();
     });
   }
 
@@ -326,5 +486,576 @@
         setTimeout(function () { tip.remove(); }, 500);
       }
     }, 14000);
+  }
+
+  /* ── 10. Comparador antes / después ──────────────────────
+     Funciona con ratón, con el dedo y con las flechas del
+     teclado. Si mañana se cambian los <img> por fotos
+     reales, no hay que tocar nada de aquí.                 */
+  document.querySelectorAll('.ba').forEach(function (ba) {
+    var usado = false;
+
+    function fijar(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      ba.style.setProperty('--pos', pct + '%');
+      ba.setAttribute('aria-valuenow', Math.round(pct));
+      ba.setAttribute('aria-valuetext', Math.round(pct) + '% visible del después');
+      if (!usado) { usado = true; ba.classList.add('is-used'); }
+    }
+
+    function desdeEvento(e) {
+      var r = ba.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      fijar((x / r.width) * 100);
+    }
+
+    var arrastrando = false;
+
+    ba.addEventListener('pointerdown', function (e) {
+      arrastrando = true;
+      ba.classList.add('is-drag');
+      ba.setPointerCapture && ba.setPointerCapture(e.pointerId);
+      desdeEvento(e);
+    });
+    ba.addEventListener('pointermove', function (e) {
+      if (arrastrando) { e.preventDefault(); desdeEvento(e); }
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) {
+      ba.addEventListener(ev, function () { arrastrando = false; ba.classList.remove('is-drag'); });
+    });
+
+    // Con el teclado: flechas mueven de 4 en 4, Inicio y Fin a los extremos
+    ba.addEventListener('keydown', function (e) {
+      var actual = parseFloat(ba.style.getPropertyValue('--pos')) || 50;
+      if (e.key === 'ArrowLeft')  { fijar(actual - 4); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { fijar(actual + 4); e.preventDefault(); }
+      if (e.key === 'Home')       { fijar(0);   e.preventDefault(); }
+      if (e.key === 'End')        { fijar(100); e.preventDefault(); }
+    });
+
+    // Pequeño vaivén al entrar en pantalla, para que se vea que se puede mover
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var visto = false;
+      new IntersectionObserver(function (entradas, obs) {
+        entradas.forEach(function (en) {
+          if (!en.isIntersecting || visto) return;
+          visto = true;
+          obs.disconnect();
+          var pasos = [50, 62, 38, 50];
+          pasos.forEach(function (p, i) {
+            setTimeout(function () {
+              ba.style.transition = 'none';
+              ba.style.setProperty('--pos', p + '%');
+            }, 500 + i * 420);
+          });
+        });
+      }, { threshold: 0.4 }).observe(ba);
+    }
+  });
+
+  /* ── 10b. Pestañas del comparador ────────────────────────
+     Cambia el par de imágenes y el texto según la
+     reparación elegida.                                    */
+  var REPARACIONES = {
+    pantalla: {
+      antes: 'assets/img/ejemplo-antes.svg',
+      despues: 'assets/img/ejemplo-despues.svg',
+      altA: 'Móvil con la pantalla rota y agrietada, antes de repararla',
+      altB: 'El mismo móvil con la pantalla nueva, después de la reparación'
+    },
+    bateria: {
+      antes: 'assets/img/ejemplo-bateria-antes.svg',
+      despues: 'assets/img/ejemplo-bateria-despues.svg',
+      altA: 'Batería hinchada que levanta la carcasa del móvil',
+      altB: 'Batería nueva instalada y terminal cerrado correctamente'
+    },
+    conector: {
+      antes: 'assets/img/ejemplo-conector-antes.svg',
+      despues: 'assets/img/ejemplo-conector-despues.svg',
+      altA: 'Conector de carga lleno de pelusa y suciedad',
+      altB: 'Conector limpio, con los contactos en buen estado'
+    },
+    agua: {
+      antes: 'assets/img/ejemplo-agua-antes.svg',
+      despues: 'assets/img/ejemplo-agua-despues.svg',
+      altA: 'Placa base con corrosión y restos de sales por daño de agua',
+      altB: 'Placa base limpia tras el tratamiento'
+    }
+  };
+
+  var pestanas = document.querySelectorAll('.ba-tab');
+  if (pestanas.length) {
+    var imgA = document.getElementById('baAntes');
+    var imgB = document.getElementById('baDespues');
+    var caja = document.getElementById('ba1');
+
+    // Precargamos para que el cambio sea instantáneo
+    Object.keys(REPARACIONES).forEach(function (k) {
+      [REPARACIONES[k].antes, REPARACIONES[k].despues].forEach(function (u) {
+        var i = new Image(); i.src = u;
+      });
+    });
+
+    pestanas.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var clave = tab.getAttribute('data-ba');
+        var r = REPARACIONES[clave];
+        if (!r) return;
+
+        pestanas.forEach(function (t) {
+          var on = (t === tab);
+          t.classList.toggle('is-on', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        document.querySelectorAll('.ba-panel').forEach(function (p) {
+          p.classList.toggle('is-on', p.getAttribute('data-panel') === clave);
+        });
+
+        caja.classList.add('is-swap');
+        setTimeout(function () {
+          imgA.src = r.antes;  imgA.alt = r.altA;
+          imgB.src = r.despues; imgB.alt = r.altB;
+          caja.style.setProperty('--pos', '50%');
+          caja.classList.remove('is-swap');
+          if (window.retraducir) window.retraducir();
+        }, 300);
+      });
+    });
+  }
+
+  /* ── 10c. Calculadora de presupuesto ─────────────────────
+     Asistente de 3 pasos que termina en un precio orientativo
+     y un mensaje de WhatsApp ya redactado.                 */
+  var calcMarcas = document.getElementById('calcMarcas');
+  if (calcMarcas && CFG.tarifas) {
+    var TAR = CFG.tarifas;
+    var elegido = { marca: null, modelo: null, gama: null, averia: null };
+
+    var avisoCalc = document.getElementById('calcAviso');
+    if (avisoCalc && !TAR.preciosConfirmados) avisoCalc.hidden = false;
+
+    function irAPaso(n) {
+      document.querySelectorAll('.calc-pane').forEach(function (p) {
+        p.classList.toggle('is-on', p.getAttribute('data-pane') === String(n));
+      });
+      document.querySelectorAll('.calc-step').forEach(function (s) {
+        var i = parseInt(s.getAttribute('data-paso'), 10);
+        s.classList.toggle('is-on', i === n);
+        s.classList.toggle('is-done', i < n);
+      });
+      var caja = document.querySelector('.calc');
+      var arriba = caja.getBoundingClientRect().top + window.scrollY - 110;
+      if (window.scrollY > arriba) window.scrollTo({ top: arriba, behavior: 'smooth' });
+    }
+
+    // Paso 1: marcas
+    calcMarcas.innerHTML = TAR.marcas.map(function (m) {
+      return '<button class="calc-opt" data-marca="' + m.id + '"><i>' + m.icono + '</i>' + m.nombre + '</button>';
+    }).join('');
+
+    calcMarcas.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-marca]');
+      if (!b) return;
+      var m = TAR.marcas.filter(function (x) { return x.id === b.getAttribute('data-marca'); })[0];
+      elegido.marca = m;
+      document.getElementById('calcModelos').innerHTML = m.modelos.map(function (mo, i) {
+        return '<button class="calc-opt" data-modelo="' + i + '"><i>📱</i><span>' + mo.n +
+               '<small>' + (TAR.gamas[mo.g] || '') + '</small></span></button>';
+      }).join('');
+      irAPaso(2);
+    });
+
+    // Paso 2: modelos
+    document.getElementById('calcModelos').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-modelo]');
+      if (!b) return;
+      var mo = elegido.marca.modelos[parseInt(b.getAttribute('data-modelo'), 10)];
+      elegido.modelo = mo.n; elegido.gama = mo.g;
+      document.getElementById('calcAverias').innerHTML = TAR.averias.map(function (a) {
+        return '<button class="calc-opt" data-averia="' + a.id + '"><i>' + a.icono + '</i>' + a.nombre + '</button>';
+      }).join('');
+      irAPaso(3);
+    });
+
+    // Paso 3: avería → resultado
+    document.getElementById('calcAverias').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-averia]');
+      if (!b) return;
+      var a = TAR.averias.filter(function (x) { return x.id === b.getAttribute('data-averia'); })[0];
+      elegido.averia = a;
+      pintarResultado();
+      irAPaso(4);
+    });
+
+    function pintarResultado() {
+      var a = elegido.averia;
+      var rango = a.rangos ? a.rangos[elegido.gama] : null;
+      var msg = 'Hola! Vengo de la calculadora de la web. Mi móvil es un ' +
+                elegido.marca.nombre + ' ' + elegido.modelo + ' y ' +
+                a.nombre.toLowerCase() + '.';
+
+      var precioHtml = rango
+        ? '<div class="calc-precio">' + rango[0] + ' € – ' + rango[1] + ' €</div>' +
+          '<p style="color:var(--muted); font-size:.92rem; margin-bottom:18px">' +
+          'Precio orientativo para ' + (TAR.gamas[elegido.gama] || '') .toLowerCase() +
+          '. El precio cerrado te lo damos al ver el terminal.</p>'
+        : '<div class="calc-precio calc-precio--consultar">Hay que verlo antes</div>' +
+          '<p style="color:var(--muted); font-size:.92rem; margin-bottom:18px">' +
+          'Esta avería no tiene precio cerrado de antemano.</p>';
+
+      document.getElementById('calcRes').innerHTML =
+        '<div class="calc-res__top">' +
+          '<span class="calc-res__ico">' + a.icono + '</span>' +
+          '<span class="calc-res__what"><b>' + elegido.marca.nombre + ' ' + elegido.modelo + '</b>' +
+          '<span>' + a.nombre + '</span></span>' +
+        '</div>' +
+        precioHtml +
+        '<span class="calc-res__plazo">🕐 ' + a.plazo + '</span>' +
+        (a.nota ? '<div class="calc-res__nota">' + a.nota + '</div>' : '') +
+        '<div class="calc-res__acciones">' +
+          '<a class="btn btn--wa btn--lg" target="_blank" rel="noopener" href="' + waUrl(msg) + '">' +
+            'Confirmar precio por WhatsApp</a>' +
+          '<a class="btn btn--ghost btn--lg" href="contacto.html#como-llegar">Cómo llegar a la tienda</a>' +
+        '</div>';
+      if (window.retraducir) window.retraducir();
+    }
+
+    document.querySelectorAll('.calc-back').forEach(function (b) {
+      b.addEventListener('click', function () { irAPaso(parseInt(b.getAttribute('data-volver'), 10)); });
+    });
+  }
+
+  /* ── 10d. ¿Qué móvil me compro? ──────────────────────────
+     No recomendamos modelos concretos a propósito: el stock
+     cambia. Recomendamos QUÉ BUSCAR, que es lo que de verdad
+     ayuda, y el cliente pregunta por WhatsApp qué hay.      */
+  var qmPresu = document.getElementById('qmPresu');
+  if (qmPresu) {
+    var qmSalida = document.getElementById('qmSalida');
+    var qmUsos   = document.getElementById('qmUsos');
+    var qmRes    = document.getElementById('qmResultado');
+
+    function pintarSlider() {
+      var pct = ((qmPresu.value - qmPresu.min) / (qmPresu.max - qmPresu.min)) * 100;
+      qmPresu.style.setProperty('--fill', pct + '%');
+      qmSalida.textContent = qmPresu.value + ' €';
+    }
+
+    function perfil(p) {
+      if (p < 200)  return { id:'basica', nom:'Gama básica',      rango:'150 – 200 €' };
+      if (p < 350)  return { id:'media',  nom:'Gama media',       rango:'200 – 350 €' };
+      if (p < 600)  return { id:'media+', nom:'Gama media alta',  rango:'350 – 600 €' };
+      return              { id:'alta',   nom:'Gama alta',        rango:'600 € en adelante' };
+    }
+
+    var CONSEJOS = {
+      basica: {
+        titulo: 'Cumple de sobra para el día a día',
+        texto: 'Para llamar, WhatsApp, fotos normales y redes sociales, un móvil de este precio va perfecto. Prioriza batería grande y 128 GB de memoria.',
+        buscar: ['Batería de 5000 mAh o más', '128 GB de almacenamiento', 'Marca conocida con recambios fáciles']
+      },
+      media: {
+        titulo: 'El punto dulce de calidad y precio',
+        texto: 'Aquí está la mayoría de la gente y con razón: rinde bien en todo, la cámara cumple y le sacas varios años. Es lo que más vendemos.',
+        buscar: ['Pantalla AMOLED si puedes', '128 o 256 GB', 'Al menos 3 años de actualizaciones']
+      },
+      'media+': {
+        titulo: 'Notarás el salto en cámara y pantalla',
+        texto: 'A partir de aquí se nota sobre todo en fotos con poca luz, en vídeo y en acabados. Merece la pena si haces muchas fotos o lo usas para trabajar.',
+        buscar: ['Buena cámara con estabilización', 'Carga rápida', '256 GB si haces muchas fotos o vídeo']
+      },
+      alta: {
+        titulo: 'Lo mejor, pero pregúntate si lo necesitas',
+        texto: 'Rinde de maravilla y dura más años actualizado. Pero sé honesto contigo: si no juegas ni haces fotos en serio, con menos dinero vas igual de bien.',
+        buscar: ['Máximo rendimiento y cámara', 'Muchos años de actualizaciones', 'Resistencia al agua certificada']
+      }
+    };
+
+    var POR_USO = {
+      fotos:   { t:'📷 Como haces muchas fotos', d:'Fíjate más en la estabilización y en cómo queda de noche que en los megapíxeles. Y coge 256 GB: las fotos ocupan.' },
+      juegos:  { t:'🎮 Como juegas', d:'Aquí sí importa el procesador y que el móvil disipe bien el calor. Mira también que tenga pantalla de 120 Hz.' },
+      bateria: { t:'🔋 Como quieres que aguante', d:'Busca 5000 mAh o más. Y ojo: una pantalla muy grande y muy brillante gasta más, aunque la batería sea grande.' },
+      video:   { t:'🎬 Como ves series', d:'Pantalla AMOLED y buen altavoz estéreo. Se nota mucho más que un procesador más potente.' },
+      trabajo: { t:'💼 Como lo usas para trabajar', d:'Prioriza batería, que llegue al final del día, y años de actualizaciones de seguridad.' },
+      basico:  { t:'💬 Como es para lo básico', d:'No te dejes convencer para gastar de más. Con gama media vas sobrado y te durará igual.' }
+    };
+
+    function recomendar() {
+      var p = parseInt(qmPresu.value, 10);
+      var perf = perfil(p);
+      var c = CONSEJOS[perf.id];
+      var usos = [].slice.call(qmUsos.querySelectorAll('input:checked')).map(function (i) { return i.value; });
+
+      document.getElementById('qmTitulo').textContent = c.titulo;
+      document.getElementById('qmSub').textContent =
+        'Con unos ' + p + ' € estás en ' + perf.nom.toLowerCase() + '. Esto es lo que miraríamos nosotros.';
+
+      var tarjetas = [
+        '<div class="qm-card qm-card--top">' +
+          '<span class="qm-card__badge">Tu perfil</span>' +
+          '<h4>' + perf.nom + '</h4>' +
+          '<div class="qm-card__precio">' + perf.rango + '</div>' +
+          '<p>' + c.texto + '</p>' +
+          '<ul class="ticks">' + c.buscar.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul>' +
+        '</div>'
+      ];
+
+      // Consejos según el uso marcado (máximo 2 para no abrumar)
+      usos.slice(0, 2).forEach(function (u) {
+        var o = POR_USO[u];
+        if (!o) return;
+        tarjetas.push(
+          '<div class="qm-card">' +
+            '<span class="qm-card__badge">Por tu uso</span>' +
+            '<h4>' + o.t + '</h4>' +
+            '<p>' + o.d + '</p>' +
+          '</div>');
+      });
+
+      // Si no ha marcado nada, damos un consejo general útil
+      if (usos.length === 0) {
+        tarjetas.push(
+          '<div class="qm-card">' +
+            '<span class="qm-card__badge">Consejo</span>' +
+            '<h4>🤝 Marca arriba para qué lo usas</h4>' +
+            '<p>Así afinamos la recomendación. Y si tienes dudas, tráete el móvil viejo y lo vemos juntos en la tienda.</p>' +
+          '</div>');
+      }
+      if (tarjetas.length === 2) {
+        tarjetas.push(
+          '<div class="qm-card">' +
+            '<span class="qm-card__badge">Siempre</span>' +
+            '<h4>🛡️ Piensa en la funda desde el día uno</h4>' +
+            '<p>Una funda y un protector cuestan una fracción de lo que cuesta cambiar una pantalla. Es el mejor dinero que vas a gastar.</p>' +
+          '</div>');
+      }
+
+      document.getElementById('qmCards').innerHTML = tarjetas.join('');
+
+      var msg = 'Hola! Estoy mirando móviles. Mi presupuesto es de unos ' + p + ' €' +
+                (usos.length ? ' y lo quiero sobre todo para: ' + usos.map(function (u) {
+                  return { fotos:'fotos', juegos:'juegos', bateria:'que dure la batería',
+                           video:'ver series', trabajo:'trabajo', basico:'lo básico' }[u];
+                }).join(', ') : '') + '. ¿Qué tenéis disponible?';
+      document.getElementById('qmWa').href = waUrl(msg);
+
+      qmRes.hidden = false;
+      if (window.retraducir) window.retraducir();
+    }
+
+    pintarSlider();
+    qmPresu.addEventListener('input', function () { pintarSlider(); recomendar(); });
+    qmUsos.addEventListener('change', recomendar);
+    recomendar();
+  }
+
+  /* ── 11. Barra de progreso de lectura ─────────────────── */
+  var progreso = document.createElement('div');
+  progreso.className = 'progress';
+  progreso.innerHTML = '<span></span>';
+  document.body.appendChild(progreso);
+  var barra = progreso.firstChild;
+
+  function pintarProgreso() {
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = alto > 0 ? (window.scrollY / alto) * 100 : 0;
+    barra.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  }
+  pintarProgreso();
+  window.addEventListener('scroll', pintarProgreso, { passive: true });
+  window.addEventListener('resize', pintarProgreso);
+
+  /* ── 12. Contadores que suben al aparecer ──────────────── */
+  var contadores = document.querySelectorAll('[data-contador]');
+  if (contadores.length && 'IntersectionObserver' in window) {
+    var ioNum = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        ioNum.unobserve(en.target);
+        var el = en.target;
+        var destino = parseFloat(el.getAttribute('data-contador'));
+        var decimales = (el.getAttribute('data-decimales') | 0);
+        var sufijo = el.getAttribute('data-sufijo') || '';
+        var dur = 1400, ini = performance.now();
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          el.textContent = destino.toFixed(decimales).replace('.', ',') + sufijo;
+          return;
+        }
+        (function paso(ahora) {
+          var t = Math.min(1, (ahora - ini) / dur);
+          var suave = 1 - Math.pow(1 - t, 3);   // desacelera al final
+          el.textContent = (destino * suave).toFixed(decimales).replace('.', ',') + sufijo;
+          if (t < 1) requestAnimationFrame(paso);
+        })(ini);
+      });
+    }, { threshold: 0.5 });
+    contadores.forEach(function (c) { ioNum.observe(c); });
+  }
+
+  /* ── 11b. Fondo temático según la página ─────────────────
+     Cada página reparte por el fondo iconos relacionados con
+     su contenido. Son decorativos y muy tenues.            */
+  var TEMAS = {
+    'index':        ['📱','🔧','🌐','🎮','🎧','📦','⚡','💬'],
+    'servicios':    ['📱','🎧','🔌','💳','🎮','🧳','🎨','🎒'],
+    'reparaciones': ['🔧','🔩','⚙️','🔋','📵','🪛','💡','🧰'],
+    'fibra':        ['🌐','📶','📡','💶','🔗','📊','🏠','📞'],
+    'vinted':       ['📦','🏷️','✉️','📬','🛍️','🚚','📮','🎁'],
+    'tienda':       ['🏬','🛍️','🎧','🧳','📱','✨','🎮','🎒'],
+    'consejos':     ['💡','🔋','💧','📵','🌐','📖','✅','⭐'],
+    'preguntas':    ['❓','💬','📖','✅','🤔','💡','📋','🔍'],
+    'contacto':     ['📍','🚗','🚌','🚶','🕐','📞','💬','🗺️'],
+    'error':        ['🔧','❓','📵','🔍','💬','🧭','📱','⚠️']
+  };
+
+  function detectarTema() {
+    var p = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    if (p.indexOf('reparar') === 0 || p.indexOf('cambiar') === 0 || p.indexOf('reparaciones') === 0) return 'reparaciones';
+    if (p.indexOf('fibra') === 0) return 'fibra';
+    if (p.indexOf('vinted') === 0) return 'vinted';
+    if (p.indexOf('tienda') === 0) return 'tienda';
+    if (p.indexOf('consejos') === 0) return 'consejos';
+    if (p.indexOf('preguntas') === 0) return 'preguntas';
+    if (p.indexOf('contacto') === 0) return 'contacto';
+    if (p.indexOf('servicios') === 0) return 'servicios';
+    if (p.indexOf('404') === 0) return 'error';
+    return 'index';
+  }
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var iconos = TEMAS[detectarTema()] || TEMAS.index;
+    var semilla = 7;
+    function az() { semilla = (semilla * 9301 + 49297) % 233280; return semilla / 233280; }
+
+    document.querySelectorAll('.section, .phero').forEach(function (sec, idx) {
+      if (sec.querySelector('.tema')) return;
+      var capa = document.createElement('div');
+      capa.className = 'tema';
+      capa.setAttribute('aria-hidden', 'true');
+      var cuantos = 5;
+      var html = '';
+      for (var i = 0; i < cuantos; i++) {
+        var ic = iconos[(idx * 3 + i) % iconos.length];
+        var top = 6 + az() * 80;
+        var left = 3 + az() * 92;
+        var size = 34 + az() * 62;
+        var rot = -22 + az() * 44;
+        var dur = 16 + az() * 14;
+        var del = -az() * 12;
+        html += '<span style="top:' + top.toFixed(1) + '%; left:' + left.toFixed(1) + '%;' +
+                ' font-size:' + size.toFixed(0) + 'px; --rot:' + rot.toFixed(0) + 'deg;' +
+                ' --dur:' + dur.toFixed(1) + 's; --del:' + del.toFixed(1) + 's">' + ic + '</span>';
+      }
+      capa.innerHTML = html;
+      sec.insertBefore(capa, sec.firstChild);
+    });
+  }
+
+  /* ── 11c. Inclinación suave de las tarjetas ───────────── */
+  if (window.matchMedia('(hover: hover)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.svc, .post-card, .fact, .vstep').forEach(function (t) {
+      t.classList.add('tilt');
+      t.addEventListener('pointermove', function (e) {
+        var r = t.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        t.style.transform = 'perspective(760px) rotateY(' + (x * 5).toFixed(2) + 'deg) rotateX(' +
+                            (-y * 5).toFixed(2) + 'deg) translateY(-7px)';
+      });
+      t.addEventListener('pointerleave', function () { t.style.transform = ''; });
+    });
+  }
+
+  /* ── 11d. Botón de volver arriba ─────────────────────── */
+  var arriba = document.createElement('button');
+  arriba.className = 'top-btn';
+  arriba.setAttribute('aria-label', 'Volver arriba');
+  arriba.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8l6 6H6z"/></svg>';
+  document.body.appendChild(arriba);
+  arriba.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  window.addEventListener('scroll', function () {
+    arriba.classList.toggle('is-in', window.scrollY > 700);
+  }, { passive: true });
+
+  /* ── 12a. Cinta de compromisos ───────────────────────────
+     Basta con poner <div class="marquee" data-marquee></div>
+     en cualquier página y aquí se rellena sola.            */
+  var COMPROMISOS = [
+    ['🛡️', 'Garantía por escrito', 'en cada reparación'],
+    ['🕐', 'Muchas averías', 'en el mismo día'],
+    ['📝', 'Presupuesto cerrado', 'antes de tocar nada'],
+    ['🆓', 'Diagnóstico gratis', 'sin compromiso'],
+    ['🏬', 'Tienda física', 'en Benalmádena'],
+    ['⭐', '4,9 en Google', 'con 223 opiniones'],
+    ['💳', 'Pago en efectivo', 'o con tarjeta'],
+    ['📦', 'Punto Vinted Go', 'entrega y recogida']
+  ];
+
+  document.querySelectorAll('[data-marquee]').forEach(function (m) {
+    var grupo = COMPROMISOS.map(function (c) {
+      return '<span class="marquee__item"><i>' + c[0] + '</i>' + c[1] +
+             ' <em>' + c[2] + '</em></span><span class="marquee__sep"></span>';
+    }).join('');
+    // Se duplica el grupo para que el bucle no tenga costuras
+    m.innerHTML = '<div class="marquee__track">' +
+                  '<div class="marquee__group">' + grupo + '</div>' +
+                  '<div class="marquee__group" aria-hidden="true">' + grupo + '</div>' +
+                  '</div>';
+  });
+
+  /* ── 12b. Índice del blog: marca el artículo que se lee ── */
+  var indice = document.querySelectorAll('.post-nav a');
+  if (indice.length && 'IntersectionObserver' in window) {
+    var ioPost = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = en.target.id;
+        indice.forEach(function (a) {
+          a.classList.toggle('is-current', a.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    document.querySelectorAll('.post[id]').forEach(function (p) { ioPost.observe(p); });
+  }
+
+  /* ── 13. Banner de ofertas (se configura en config.js) ─── */
+  var oferta = CFG.oferta;
+  if (oferta && oferta.activa) {
+    var yaCerrado = false;
+    var clave = 'oferta:' + (oferta.id || 'x');
+    try { yaCerrado = localStorage.getItem(clave) === '1'; } catch (e) {}
+
+    if (!yaCerrado) {
+      var b = document.createElement('div');
+      b.className = 'promo';
+      b.innerHTML =
+        '<div class="promo__in">' +
+          '<span class="promo__tag">' + (oferta.etiqueta || 'Oferta') + '</span>' +
+          '<span class="promo__txt">' + oferta.texto + '</span>' +
+          (oferta.textoBoton ? '<a class="promo__btn" target="_blank" rel="noopener" href="' +
+              waUrl(oferta.mensajeWhatsapp || oferta.texto) + '">' + oferta.textoBoton + '</a>' : '') +
+          '<button class="promo__x" aria-label="Cerrar aviso de oferta">&times;</button>' +
+        '</div>';
+      document.body.insertBefore(b, document.body.firstChild);
+      requestAnimationFrame(function () { b.classList.add('is-in'); });
+
+      b.querySelector('.promo__x').addEventListener('click', function (e) {
+        e.stopPropagation();
+        b.classList.remove('is-in');
+        setTimeout(function () { b.remove(); }, 400);
+        try { localStorage.setItem(clave, '1'); } catch (e2) {}
+      });
+
+      // En móvil el botón se oculta para ahorrar espacio, así que
+      // toda la barra hace de enlace.
+      b.addEventListener('click', function (e) {
+        if (e.target.closest('.promo__x') || e.target.closest('.promo__btn')) return;
+        window.open(waUrl(oferta.mensajeWhatsapp || oferta.texto), '_blank', 'noopener');
+      });
+    }
   }
 })();
