@@ -267,10 +267,16 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
   }
   .nav-close:active{background:rgba(255,255,255,.14)}
 
-  /* Fondo oscuro detrás del panel */
+  /* Fondo oscuro detrás del panel.
+     Sin backdrop-filter: en varios Chrome de Android el
+     desenfoque de un elemento fixed se "contagia" a otros
+     elementos fixed apilados encima (aquí, el propio panel
+     del menú), emborronando también su texto. Un negro más
+     opaco consigue el mismo efecto de separación sin ese
+     riesgo, en cualquier dispositivo.                       */
   .nav-backdrop{
     position:fixed; inset:0; z-index:190;
-    background:rgba(0,0,0,.6); backdrop-filter:blur(3px);
+    background:rgba(0,0,0,.72);
     opacity:0; visibility:hidden; transition:opacity .3s, visibility .3s;
   }
   .nav-backdrop.is-on{opacity:1; visibility:visible}
@@ -763,7 +769,10 @@ button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
     position:fixed; left:0; right:0; bottom:0; z-index:95;
     display:flex; align-items:stretch; gap:10px;
     padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-    background:rgba(10,10,13,.92); backdrop-filter:blur(16px);
+    /* Sin backdrop-filter: mismo motivo que en .nav-backdrop.
+       El fondo ya es casi opaco (.92), el desenfoque apenas
+       se notaba y evitamos el riesgo en Android.             */
+    background:rgba(10,10,13,.96);
     border-top:1px solid var(--line);
     box-shadow:0 -10px 30px -12px rgba(0,0,0,.9);
     transform:translateY(120%); transition:transform .35s cubic-bezier(.34,1.2,.64,1);
