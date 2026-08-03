@@ -567,23 +567,27 @@
      reparación elegida.                                    */
   var REPARACIONES = {
     pantalla: {
-      antes: 'assets/img/ejemplo-antes.svg',
-      despues: 'assets/img/ejemplo-despues.svg',
+      antes: 'assets/img/ejemplo-antes.jpg',
+      despues: 'assets/img/ejemplo-despues.jpg',
       altA: 'Móvil con la pantalla rota y agrietada, antes de repararla',
       altB: 'El mismo móvil con la pantalla nueva, después de la reparación'
     },
     bateria: {
-      antes: 'assets/img/ejemplo-bateria-antes.svg',
-      despues: 'assets/img/ejemplo-bateria-despues.svg',
+      antes: 'assets/img/ejemplo-bateria-antes.jpg',
+      despues: 'assets/img/ejemplo-bateria-despues.jpg',
       altA: 'Batería hinchada que levanta la carcasa del móvil',
       altB: 'Batería nueva instalada y terminal cerrado correctamente'
     },
     conector: {
-      antes: 'assets/img/ejemplo-conector-antes.svg',
-      despues: 'assets/img/ejemplo-conector-despues.svg',
+      antes: 'assets/img/ejemplo-conector-antes.jpg',
+      despues: 'assets/img/ejemplo-conector-despues.jpg',
       altA: 'Conector de carga lleno de pelusa y suciedad',
       altB: 'Conector limpio, con los contactos en buen estado'
     },
+    /* "Agua" sigue con la ilustración de muestra: la foto real que
+       recibimos para el "después" no encaja con el "antes" (ángulo
+       y encuadre distintos), así que se queda pendiente hasta tener
+       una pareja de fotos coherente entre sí. */
     agua: {
       antes: 'assets/img/ejemplo-agua-antes.svg',
       despues: 'assets/img/ejemplo-agua-despues.svg',

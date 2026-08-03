@@ -1750,8 +1750,15 @@ input[type=range].qm-slider:focus-visible{outline:3px solid var(--magenta); outl
    Se arrastra con el ratón, con el dedo o con las flechas
    del teclado. Cuando haya fotos reales, basta con cambiar
    los dos <img> por las fotografías del trabajo.          */
-.ba-wrap{display:grid; grid-template-columns:1.15fr .85fr; gap:44px; align-items:center}
-@media(max-width:900px){ .ba-wrap{grid-template-columns:1fr; gap:30px} }
+/* La foto (horizontal, cámara real) va arriba a todo lo ancho;
+   el texto debajo. Con fotos de verdad en formato apaisado no
+   cabía bien en la columna estrecha que usaban las ilustraciones
+   verticales de antes. */
+.ba-wrap{display:flex; flex-direction:column; gap:30px}
+.ba-info{max-width:720px; margin-inline:auto; width:100%; text-align:center}
+.ba-info .ticks{text-align:left; display:inline-grid}
+.ba-info .lead{margin-inline:auto}
+.ba-info .btn{margin-inline:auto}
 
 /* Pestañas de tipo de reparación */
 .ba-tabs{
@@ -1791,7 +1798,8 @@ input[type=range].qm-slider:focus-visible{outline:3px solid var(--magenta); outl
 
 .ba{
   position:relative; --pos:50%;
-  aspect-ratio:600/740; max-height:560px; margin-inline:auto; width:100%;
+  /* Proporción real de las fotos (formato apaisado, 1400x764) */
+  aspect-ratio:1400/764; max-width:900px; margin-inline:auto; width:100%;
   border-radius:var(--radius-lg); overflow:hidden;
   border:1px solid var(--line-2); box-shadow:var(--shadow);
   cursor:ew-resize; user-select:none; -webkit-user-select:none; touch-action:pan-y;
